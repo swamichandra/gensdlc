@@ -48,7 +48,7 @@ if submit_button:
     with st.spinner(text="Converting your text query to KSQL and executing ..."):
         # Create a VertexAI client object.
         """Predict using a Large Language Model."""
-        vertexai.init(project=project_id, location=location, credentials="AIzaSyCtqJUjWvVB96LE6YkO7m1BLujha204oMk",)#credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
+        vertexai.init(project=project_id, location=location, credentials=st.secrets["GCP_API_KEY"],)#credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
         
         # Create a VertexAI client object.
         #client = vertexai.Client()
