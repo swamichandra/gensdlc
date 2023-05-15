@@ -47,7 +47,7 @@ ta_val = '''
 '''
 
 with st.form(key='my_form_to_submit'):
-    user_request = st.text_area("The program requirements or comments from an existing program header", value=ta_val)
+    user_request = st.text_area("The program requirements or comments from an existing program header", height=20, value=ta_val)
     submit_button = st.form_submit_button(label='Convert')
     
 if submit_button:
