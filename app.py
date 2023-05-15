@@ -12,7 +12,7 @@ st.title('Reimagine SLDC with Google Vertex, Bard, PaLM-2')
 
 
 # Global Settings and Config
-project_id = "swamigenaihive"
+project_id = "learning-351419"
 model_name = "chat-bison@001"
 temperature = 0.2
 max_output_tokens = 256
@@ -48,7 +48,8 @@ if submit_button:
     with st.spinner(text="Converting your text query to KSQL and executing ..."):
         # Create a VertexAI client object.
         """Predict using a Large Language Model."""
-        vertexai.init(project=project_id, location=location, credentials=st.secrets["GCP_API_KEY"],)#credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
+        vertexai.init(project=project_id, location=location, credentials=st.secrets["GCP_API_KEY"],)
+        #credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
         
         # Create a VertexAI client object.
         #client = vertexai.Client()
