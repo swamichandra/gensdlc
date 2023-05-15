@@ -5,8 +5,7 @@ from google.cloud import aiplatform
 import vertexai
 from vertexai.preview.language_models import ChatModel, InputOutputTextPair
 from vertexai.preview.language_models import TextGenerationModel
-
-
+from google.oauth2 import service_account
 import os
 
 st.set_page_config(page_title="Reimagine SLDC with Google Vertex, Bard, PaLM-2", page_icon=":random:", layout="wide")
@@ -23,7 +22,8 @@ top_k = 40
 location = "us-central1"
 model_name = "text-bison@001"
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="learning-351419-2f2aca25aadf.json"
+#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="learning-351419-2f2aca25aadf.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]=credentials = service_account.Credentials.from_service_account_file('learning-351419-2f2aca25aadf.json')
 
 #bootstrap text for text area
 ta_val = '''* CBDEM1 IS A SIMPLE EXAMPLE PROGRAM WHICH ADDS NEW EMPLOYEE
