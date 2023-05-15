@@ -3,6 +3,8 @@ import streamlit.components.v1 as components
 
 import vertexai
 from vertexai.preview.language_models import ChatModel, InputOutputTextPair
+from vertexai.preview.language_models import TextGenerationModel
+
 import os
 from google.cloud import aiplatform
 
