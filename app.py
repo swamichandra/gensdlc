@@ -22,8 +22,32 @@ location = "us-central1"
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="swamigenaihive-f663031ef703.json"
 
+#bootstrap text for text area
+ta_val = '''
+* CBDEM1 IS A SIMPLE EXAMPLE PROGRAM WHICH ADDS NEW EMPLOYEE
+* ROWS TO THE PERSONNEL DATA BASE. CHECKING IS DONE TO
+* INSURE THE INTEGRITY OF THE DATA BASE. EMPLOYEE NUMBERS
+* ARE AUTOMATICALLY SELECTED USING THE CURRENT MAXIMUM
+* EMPLOYEE NUMBER AS THE START. DUPLICATE NUMBERS ARE SKIPPED.
+* THE PROGRAM QUERIES THE USER FOR DATA AS FOLLOWS:
+*
+*		 Enter employee name  :
+*		 Enter employee job   :
+*		 Enter employee salary:
+*		 Enter employee dept  :
+*
+* TO EXIT THE PROGRAM, ENTER A CARRIAGE RETURN AT THE
+* PROMPT FOR EMPLOYEE NAME. IF THE ROW IS SUCCESSFULLY 
+* INSERTED, THE FOLLOWING IS PRINTED:
+*
+* ENAME added to DNAME department as employee # NNNNN
+*
+* THE MAXIMUM LENGTHS OF THE 'ENAME', 'JOB', AND 'DNAME'
+* COLUMNS WILL BE DETERMINED BY THE ODESCR CALL.
+'''
+
 with st.form(key='my_form_to_submit'):
-    user_request = st.text_area("The program requirements or comments from an existing program header")
+    user_request = st.text_area("The program requirements or comments from an existing program header", value=ta_val)
     submit_button = st.form_submit_button(label='Convert')
     
 if submit_button:
