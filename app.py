@@ -22,7 +22,7 @@ top_k = 40
 location = "us-central1"
 model_name = "text-bison@001"
 
-#os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="learning-351419-2f2aca25aadf.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="learning-351419-2f2aca25aadf.json"
 credentials = service_account.Credentials.from_service_account_file('learning-351419-2f2aca25aadf.json')
 
 #bootstrap text for text area
