@@ -69,9 +69,9 @@ if submit_button:
     with st.expander("See Prompt"):
         st.code(prompt)
 
-    with st.spinner(text="Converting your text query to KSQL and executing ..."):
+    with st.spinner(text="Converting your software requirements into a bootstrappable code ..."):
         # Create a VertexAI client object.
-        """Predict using a Large Language Model."""
+        #Predict using a Large Language Model.
         vertexai.init(project=project_id, location=location, credentials=st.secrets["GCP_API_KEY"],)
         #credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
         
