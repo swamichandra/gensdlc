@@ -15,10 +15,11 @@ st.title('Reimagine SLDC with Google Vertex, Bard, PaLM-2')
 project_id = "learning-351419"
 model_name = "chat-bison@001"
 temperature = 0.2
-max_output_tokens = 256
+max_output_tokens = 1024
 top_p = 0.8
 top_k = 40
 location = "us-central1"
+tuned_model_name = "text-bison@001"
 
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="learning-351419-2f2aca25aadf.json"
 
@@ -72,12 +73,6 @@ if submit_button:
         #Predict using a Large Language Model.
         vertexai.init(project=project_id, location=location, credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
         
-        # Create a VertexAI client object.
-        #client = vertexai.Client()
-
-        # Use the client object to initialize the vertexai.init() function.
-
-        
         chat_model = ChatModel.from_pretrained(model_name)
         parameters = {
         "temperature": temperature,
@@ -87,6 +82,10 @@ if submit_button:
         #credentials: Optional[google.auth.credentials.Credentials] = None,
         }
         
-        chat = chat_model.start_chat(context=ctx, examples=[])
-        response=chat.send_message(prompt,**parameters)
+        #chat = chat_model.start_chat(context=ctx, examples=[])
+        #response=chat.send_message(prompt,**parameters)
+        #st.markdown(response.text)
+        
+        response = model.predict(content, temperature=temperature, max_output_tokens=max_output_tokens, top_k=top_k, top_p=top_p,)
         st.markdown(response.text)
+        #predict_large_language_model_sample("learning-351419", "text-bison@001", 0.2, 1024, 0.8, 40, '''Generate Python code based on the program description provided in the contextGenerate a well written Python code following the top-10 Python coding practices. GUIDELINES: Use descriptive variable names. Use comments to explain your code. Use white space to format your code. Use functions to break down your code into smaller, more manageable chunks. Use descriptive names for all variables, function names, constants, and other identifiers. Follow the PEP 8 style guide. Break your code into functions. Use modules and packages. Document the generated code. I only need the code.
