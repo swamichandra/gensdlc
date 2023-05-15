@@ -1,13 +1,13 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
+from google.cloud import aiplatform
 import vertexai
 from vertexai.preview.language_models import ChatModel, InputOutputTextPair
 from vertexai.preview.language_models import TextGenerationModel
 
-import os
-from google.cloud import aiplatform
 
+import os
 
 st.set_page_config(page_title="Reimagine SLDC with Google Vertex, Bard, PaLM-2", page_icon=":random:", layout="wide")
 st.title('Reimagine SLDC with Google Vertex, Bard, PaLM-2')
@@ -75,9 +75,6 @@ if submit_button:
         #Predict using a Large Language Model.
         vertexai.init(project=project_id, location=location, credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
         model = TextGenerationModel.from_pretrained(model_name)
-        
-        if tuned_model_name:
-            model = model.get_tuned_model(tuned_model_name)
         
         parameters = {
         "temperature": temperature,
