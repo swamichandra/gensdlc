@@ -23,7 +23,7 @@ location = "us-central1"
 model_name = "text-bison@001"
 
 #os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="learning-351419-2f2aca25aadf.json"
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = service_account.Credentials.from_service_account_file('learning-351419-2f2aca25aadf.json')
+credentials = service_account.Credentials.from_service_account_file('learning-351419-2f2aca25aadf.json')
 
 #bootstrap text for text area
 ta_val = '''* CBDEM1 IS A SIMPLE EXAMPLE PROGRAM WHICH ADDS NEW EMPLOYEE
@@ -73,7 +73,7 @@ if submit_button:
     with st.spinner(text="Converting your software requirements into a bootstrappable code ..."):
         # Create a VertexAI client object.
         #Predict using a Large Language Model.
-        vertexai.init(project=project_id, location=location, credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
+        vertexai.init(project=project_id, location=location, credentials=credentials,)
         model = TextGenerationModel.from_pretrained(model_name)
         
         parameters = {
