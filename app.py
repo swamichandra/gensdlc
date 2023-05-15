@@ -20,11 +20,10 @@ top_p = 0.8
 top_k = 40
 location = "us-central1"
 
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="swamigenaihive-f663031ef703.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="learning-351419-2f2aca25aadf.json"
 
 #bootstrap text for text area
-ta_val = '''
-* CBDEM1 IS A SIMPLE EXAMPLE PROGRAM WHICH ADDS NEW EMPLOYEE
+ta_val = '''* CBDEM1 IS A SIMPLE EXAMPLE PROGRAM WHICH ADDS NEW EMPLOYEE
 * ROWS TO THE PERSONNEL DATA BASE. CHECKING IS DONE TO
 * INSURE THE INTEGRITY OF THE DATA BASE. EMPLOYEE NUMBERS
 * ARE AUTOMATICALLY SELECTED USING THE CURRENT MAXIMUM
@@ -43,8 +42,7 @@ ta_val = '''
 * ENAME added to DNAME department as employee # NNNNN
 *
 * THE MAXIMUM LENGTHS OF THE 'ENAME', 'JOB', AND 'DNAME'
-* COLUMNS WILL BE DETERMINED BY THE ODESCR CALL.
-'''
+* COLUMNS WILL BE DETERMINED BY THE ODESCR CALL.'''
 
 with st.form(key='my_form_to_submit'):
     user_request = st.text_area("The program requirements or comments from an existing program header", height=50, value=ta_val)
@@ -72,8 +70,7 @@ if submit_button:
     with st.spinner(text="Converting your software requirements into a bootstrappable code ..."):
         # Create a VertexAI client object.
         #Predict using a Large Language Model.
-        vertexai.init(project=project_id, location=location, credentials=st.secrets["GCP_API_KEY"],)
-        #credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
+        vertexai.init(project=project_id, location=location, credentials=os.environ["GOOGLE_APPLICATION_CREDENTIALS"],)
         
         # Create a VertexAI client object.
         #client = vertexai.Client()
