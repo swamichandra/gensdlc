@@ -30,8 +30,10 @@ def generate_response(txt):
     docs = [Document(page_content=t) for t in texts]
     
     # Prompt Template
-    prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code."""
-    PROMPT = PromptTemplate(template=prompt_template) #input_variables=["text"])
+    prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
+    {text}
+    """
+    PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
     
     # Text summarization
     chain = LLMChain(prompt=PROMPT, llm=llm)
