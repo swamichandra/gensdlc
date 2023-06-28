@@ -2,7 +2,8 @@ import os, vertexai, streamlit as st
 from vertexai.preview.language_models import TextGenerationModel
 
 # Streamlit app
-st.title('Palmfish')
+st.set_page_config(page_title="Generative AI for SDLC", page_icon=":random:", layout="wide")
+st.title('👩‍💻 Generative AI for SDLC')
 
 # Create a file upload widget for the credentials JSON file
 creds_file = st.file_uploader("Upload Google Cloud credentials file", type="json")
