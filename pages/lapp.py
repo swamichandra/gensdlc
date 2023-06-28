@@ -57,8 +57,7 @@ if creds_file is not None:
     # Form to accept user's text input for summarization
     result = []
     with st.form('summarize_form', clear_on_submit=True):
-        
-        submitted = st.form_submit_button('SUBMIT')
+        submitted = st.button('SUBMIT')
         
         if submitted:
             with st.spinner('Performing magic ...'):
