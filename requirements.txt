@@ -1,3 +1,5 @@
 streamlit
 google-cloud-aiplatform
 vertexai
+langchain
+tiktoken
