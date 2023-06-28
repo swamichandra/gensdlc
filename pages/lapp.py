@@ -10,7 +10,6 @@ from langchain.docstore.document import Document
 from langchain.text_splitter import CharacterTextSplitter
 from langchain import PromptTemplate, LLMChain
 from langchain.llms import VertexAI
-from langchain.embeddings import VertexAIEmbeddings
 from google.cloud import aiplatform
 
 def generate_response(txt):    
@@ -39,7 +38,6 @@ st.set_page_config(page_title="Generative AI Text Summarization App", page_icon=
 st.title('📚 Generative AI Text Summarization App')
 
 aiplatform.init(project="project=learning-351419", location="us-central1")
-embeddings_service = VertexAIEmbeddings()
 
 # Create a file upload widget for the credentials JSON file
 creds_file = st.file_uploader("Upload Google Cloud credentials file", type="json")
