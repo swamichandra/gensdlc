@@ -57,16 +57,13 @@ if creds_file is not None:
     # Form to accept user's text input for summarization
     result = []
     with st.form('summarize_form', clear_on_submit=True):
-        # Get OpenAI APi Key
-        openai_api_key = st.text_input('OpenAI API Key', type='password', disabled=not txt_input, value=st.secrets["OPENAI_API_KEY"])
         
         submitted = st.form_submit_button('SUBMIT')
         
-        if submitted and openai_api_key.startswith('sk-'):
-            with st.spinner('Summarizing ...'):
+        if submitted:
+            with st.spinner('Performing magic ...'):
                 response = generate_response(txt_input)
                 result.append(response)
-                del openai_api_key
 
     #Display result
     if len(result):
