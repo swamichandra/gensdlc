@@ -60,6 +60,6 @@ if creds_file is not None:
              response = generate_response(txt_input)
              result.append(response)
 
-#Display result
-if len(result):
-    st.write(response)
+    #Display result
+    if len(result):
+        st.write(response)
