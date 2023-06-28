@@ -19,7 +19,8 @@ def generate_response(txt):
     PRIMARY_MODEL = 'text-bison@001'
   
     # Instantiate the LLM model
-    llm = VertexAI(()#model_name=PRIMARY_MODEL)
+    llm = VertexAI()
+    #model_name=PRIMARY_MODEL)
     
     # Split text
     text_splitter = CharacterTextSplitter()
