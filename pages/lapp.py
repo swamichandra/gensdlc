@@ -54,16 +54,12 @@ if creds_file is not None:
     # Text input
     txt_input = st.text_area('Enter your text to summarize', '', height=200)
 
-    # Form to accept user's text input for summarization
     result = []
-    with st.form('summarize_form', clear_on_submit=True):
-        submitted = st.button('SUBMIT')
-        
-        if submitted:
-            with st.spinner('Performing magic ...'):
-                response = generate_response(txt_input)
-                result.append(response)
-
+    if st.button("Submit"):
+        with st.spinner('Performing magic ...'):
+             response = generate_response(txt_input)
+             result.append(response)
+   
     #Display result
     if len(result):
         st.write(response)
