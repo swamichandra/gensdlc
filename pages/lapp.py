@@ -37,7 +37,7 @@ def generate_response(txt):
 st.set_page_config(page_title="Generative AI Text Summarization App", page_icon=":random:", layout="centered")
 st.title('📚 Generative AI Text Summarization App')
 
-aiplatform.init(project="project=learning-351419", location="us-central1")
+#aiplatform.init(project="project=learning-351419", location="us-central1")
 
 # Create a file upload widget for the credentials JSON file
 creds_file = st.file_uploader("Upload Google Cloud credentials file", type="json")
