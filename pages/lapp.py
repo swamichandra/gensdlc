@@ -4,6 +4,8 @@
 # This code is meant to serve as a template / boilerplate for building LLM based apps.
 # Feel free to expand, extent and enhance.
 
+import os
+import vertexai
 import streamlit as st
 from langchain import OpenAI, PromptTemplate
 from langchain.docstore.document import Document
@@ -11,6 +13,7 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain import PromptTemplate, LLMChain
 from langchain.llms import VertexAI
 from google.cloud import aiplatform
+from vertexai.preview.language_models import TextGenerationModel
 
 def generate_response(txt):    
     PRIMARY_MODEL = 'text-bison@001'
