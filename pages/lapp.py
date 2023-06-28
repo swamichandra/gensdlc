@@ -59,7 +59,7 @@ if creds_file is not None:
         with st.spinner('Performing magic ...'):
              response = generate_response(txt_input)
              result.append(response)
-
-    #Display result
-    if len(result):
-        st.write(response)
+    
+        #Display result
+        if len(result):
+            st.write(response)
