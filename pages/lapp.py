@@ -54,16 +54,28 @@ st.set_page_config(page_title="Generative AI Text Summarization App",
                    page_icon=":random:", layout="centered")
 st.title('📚 Generative AI Text Summarization App')
 
-# Text input
-txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
+# Create a file upload widget for the credentials JSON file
+creds_file = st.file_uploader(
+    "Upload Google Cloud credentials file", type="json")
 
-result = []
-if st.button("Submit"):
-    with st.spinner('Performing magic ...'):
-        st.info(txt_input)
-        response = generate_response(txt_input.strip())
-        result.append(response)
+if creds_file is not None:
+    creds_contents = creds_file.read().decode("utf-8")
+    with open("temp_credentials.json", "w") as f:
+        f.write(creds_contents)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "temp_credentials.json"
+    # clear the data in the info file
+    open("temp_credentials.json",'w').close()
 
-# Display result
-if len(result):
-    st.write(response)
+    # Text input
+    txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
+
+    result = []
+    if st.button("Submit"):
+        with st.spinner('Performing magic ...'):
+            st.info(txt_input)
+            response = generate_response(txt_input.strip())
+            result.append(response)
+
+    # Display result
+    if len(result):
+        st.write(response)
