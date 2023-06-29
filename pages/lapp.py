@@ -19,27 +19,28 @@ from vertexai.preview.language_models import TextGenerationModel
 #vertexai.init(project=PROJECT_ID, location="us-central1")
 
 def generate_response(txt):
-    # Instantiate the LLM model
-    PRIMARY_MODEL = 'text-bison@001'
-    try:
-        llm = VertexAI(model_name=PRIMARY_MODEL, max_output_tokens=256, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
-    except Exception as e:
-        st.error("Error during LLM model initialization")
-        st.error(e)
-        
     # Prompt Template
     prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
     {text}
     """
     PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
 
-    # Text summarization
     res = None
+    
+    # Instantiate the LLM model
+    PRIMARY_MODEL = 'text-bison@001'
     try:
-        chain = LLMChain(prompt=PROMPT, llm=llm)
-        res = chain.run(txt)
+        llm = VertexAI(model_name=PRIMARY_MODEL, max_output_tokens=256, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+        
+        # Text summarization
+        try:
+            chain = LLMChain(prompt=PROMPT, llm=llm)
+            res = chain.run(txt)
+        except Exception as e:
+            st.error("Error during LLM model chaining and invocation")
+            st.error(e)
     except Exception as e:
-        st.error("Error during LLM model chaining and invocation")
+        st.error("Error during LLM model initialization")
         st.error(e)
 
     return res
@@ -60,7 +61,7 @@ if creds_file is not None:
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "temp_credentials.json"
 
     # Text input
-    txt_input = st.text_area('Enter your text to summarize', '', height=200)
+    txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
 
     result = []
     if st.button("Submit"):
