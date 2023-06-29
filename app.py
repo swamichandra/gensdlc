@@ -94,7 +94,7 @@ def generate_test_cases(txt, code):
         # Text summarization
         try:
             chain = LLMChain(prompt=PROMPT2, llm=llm)
-            res = chain.run(txt)
+            res = chain.run(txt, code)
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
             st.error(e)
