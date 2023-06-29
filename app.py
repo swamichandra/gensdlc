@@ -165,7 +165,7 @@ if creds_file is not None:
                     st.subheader("Test Cases")
                     st.write(response2)
             
-             with col3:
+            with col3:
                 st.subheader("Deployment Script")
                 st.write("DevSecOps Coming soon...")
             
