@@ -60,7 +60,7 @@ if creds_file is not None:
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "temp_credentials.json"
 
     # Text input
-    txt_input = st.text_area('Enter your text to summarize', '', height=200, value='403 Vertex AI API has not been used in project 868231854759 before or it is disabled. Enable it by visiting')
+    txt_input = st.text_area('Enter your text to summarize', '', height=200, value='Write code to generate prime numbers between 1234 and 6789')
 
     result = []
     if st.button("Submit"):
