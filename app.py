@@ -100,7 +100,7 @@ if creds_file is not None:
         }
         """
     
-    txt_input = st.text_area('Enter your text to summarize', input_text, height=200)
+    txt_input = st.text_area('Enter your text to summarize', random.choice(sample_code_gen_qns), height=200)
 
     result = []
     if st.button("Submit"):
