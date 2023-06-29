@@ -5,6 +5,7 @@
 # Feel free to expand, extent and enhance.
 
 import os
+from datetime import datetime
 import vertexai
 import streamlit as st
 from langchain import OpenAI, PromptTemplate
@@ -59,7 +60,12 @@ creds_file = st.file_uploader(
     "Upload Google Cloud credentials file", type="json")
 
 if creds_file is not None:
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = creds_file.read().decode("utf-8")
+    now = datetime.now()
+    randomfilename = "temp_credentials_" + now.strftime("%m%d%Y_%H%M%S")
+
+    with open(randomfilename, "w") as f:
+        f.write(creds_contents)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = randomfilename
 
     # Text input
     txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
