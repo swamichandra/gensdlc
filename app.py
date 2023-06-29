@@ -76,7 +76,7 @@ def generate_code(txt):
 
 
 @st.cache_resource
-def generate_test_cases(txt):
+def generate_test_cases(txt, code):
     # Prompt Template
     test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases adopting solid testing practices. Add relevant comments. Don't explain the test case, just generate them as bullet points.
     {text}
@@ -94,7 +94,7 @@ def generate_test_cases(txt):
         # Text summarization
         try:
             chain = LLMChain(prompt=PROMPT, llm=llm)
-            res = chain.run(txt)
+            res = chain.run(txt, code)
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
             st.error(e)
@@ -131,9 +131,9 @@ if creds_file is not None:
     col1, buff, col2 = st.columns([2,1,2])
     
     if submit_button:
-        #result = []
+        result = []
         response = None
-        #result2 = []
+        result2 = []
         response2 = None
         with st.spinner('Wait for the magic ...'):
             with col1:
@@ -145,11 +145,11 @@ if creds_file is not None:
                     st.write(response)
                 
             with col2:
-                st.write("place holder for test cases")
-                st.write(response)
-                #response2 = generate_test_cases(text_input.strip(), response)
-                #result2.append(response2)
+                #st.write("place holder for test cases")
+                #st.write(response)
+                response2 = generate_test_cases(text_input.strip(), response)
+                result2.append(response2)
                 
                 # Display test case
-                #if len(result2):
-                    #st.write(response2)
+                if len(result2):
+                    st.write(response2)
