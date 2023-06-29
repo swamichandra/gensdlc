@@ -15,11 +15,13 @@ from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
-
 def generate_response(txt):
     # Instantiate the LLM model
     PRIMARY_MODEL = 'text-bison@001'
-    llm = VertexAI()
+    try:
+        llm = VertexAI()
+    except:
+        print ("Error during LLM model initialization ...")
 
     # Prompt Template
     prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
@@ -28,9 +30,14 @@ def generate_response(txt):
     PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
 
     # Text summarization
-    chain = LLMChain(prompt=PROMPT, llm=llm)
-    return chain.run(txt)
+    res = None
+    try:
+        chain = LLMChain(prompt=PROMPT, llm=llm)
+        res = chain.run(txt)
+    except:
+        print ("Error during LLM model chaining and invocation ...")
 
+    return res
 
 # Page title
 st.set_page_config(page_title="Generative AI Text Summarization App",
@@ -56,7 +63,7 @@ if creds_file is not None:
     if st.button("Submit"):
         with st.spinner('Performing magic ...'):
             st.info(txt_input)
-            response = generate_response(txt_input)
+            response = generate_response(txt_input.strip())
             result.append(response)
 
     # Display result
