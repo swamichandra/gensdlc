@@ -16,8 +16,17 @@ from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
-PROJECT_ID = "learning-351419"  # @param {type:"string"}
-vertexai.init(project=PROJECT_ID, location="us-central1")
+# Global Settings and Config
+project_id = "learning-351419"
+loc = "us-central1"
+primary_model_name = "text-bison@001"
+temperature = 0.2
+max_output_tokens = 1024
+top_p = 0.8
+top_k = 40
+location = "us-central1"
+model_name = "text-bison@001"
+vertexai.init(project=project_id, location=loc)
 
 def generate_response(txt):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
@@ -32,11 +41,9 @@ def generate_response(txt):
     res = None
     
     # Instantiate the LLM model
-    PRIMARY_MODEL = 'text-bison@001'
     try:
-        llm = VertexAI(model_name=PRIMARY_MODEL, max_output_tokens=506, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
-        #llm = VertexAI(model_name=PRIMARY_MODEL)
-        
+        llm = VertexAI(model_name=primary_model_name, max_output_tokens=506, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+       
         # Text summarization
         try:
             chain = LLMChain(prompt=PROMPT, llm=llm)
