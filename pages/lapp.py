@@ -55,9 +55,10 @@ if creds_file is not None:
     result = []
     if st.button("Submit"):
         with st.spinner('Performing magic ...'):
+            st.info(txt_input)
             response = generate_response(txt_input)
             result.append(response)
 
-        # Display result
-        if len(result):
-            st.write(response)
+    # Display result
+    if len(result):
+        st.write(response)
