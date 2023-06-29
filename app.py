@@ -107,7 +107,7 @@ if creds_file is not None:
         """
     
     # Using the "with" syntax
-    with st.form(key='sdlc_form'):
+    with st.form(key='sdlc_form', clear_on_submit = False):
         text_input = st.text_area(
             'Enter your text to summarize', INPUT_TEXT, height=200)
         submit_button = st.form_submit_button(label='Submit')
