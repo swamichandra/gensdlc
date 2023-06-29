@@ -82,7 +82,7 @@ def generate_test_cases(txt, code):
     {text}
     {code}
     """
-    PROMPT = PromptTemplate(template=test_case_gen_prompt_template, input_variables=["text", "code"])
+    PROMPT2 = PromptTemplate(template=test_case_gen_prompt_template, input_variables=["text", "code"])
 
     res = None
 
@@ -93,8 +93,8 @@ def generate_test_cases(txt, code):
 
         # Text summarization
         try:
-            chain = LLMChain(prompt=PROMPT, llm=llm)
-            res = chain.run(txt, code)
+            chain = LLMChain(prompt=PROMPT2, llm=llm)
+            res = chain.run(txt)
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
             st.error(e)
