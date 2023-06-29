@@ -19,7 +19,7 @@ def generate_response(txt):
     # Instantiate the LLM model
     PRIMARY_MODEL = 'text-bison@001'
     try:
-        llm = VertexAI()
+        llm = VertexAI(model_name=PRIMARY_MODEL, max_output_tokens=256, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
     except Exception as e:
         st.error("Error during LLM model initialization")
         st.error(e)
