@@ -131,10 +131,10 @@ if creds_file is not None:
     col1, buff, col2 = st.columns([2,1,2])
     
     if submit_button:
-        result = None
-        response = None
-        result2 = None
-        response2 = None
+        #result = None
+        #response = None
+        #result2 = None
+        #response2 = None
         with st.spinner('Wait for the magic ...'):
             with col1:
                 response = generate_code(text_input.strip())
