@@ -113,7 +113,7 @@ if creds_file is not None:
         submit_button = st.form_submit_button(label='Submit')
         response = generate_response(text_input.strip())
         result.append(response)
-
-# Display result
-if len(result):
-    st.write(result)
+    
+    # Display result
+    if len(result):
+        st.write(result)
