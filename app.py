@@ -130,8 +130,12 @@ if creds_file is not None:
     #with st.form(key='sdlc_form', clear_on_submit = False):
     text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
     submit_button = st.button('Submit', key='rand1')
+    random_button = st.button('Randomize', key='randrand')
     
     col1, buff, col2 = st.columns([2,1,2])
+    
+    if random_button:
+        text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
     
     if submit_button:
         result = []
