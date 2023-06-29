@@ -37,10 +37,10 @@ def generate_random_input():
     
     INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
    
-    if 'INPUT_TEXT_TMP' not in st.session_state:
-        st.session_state.INPUT_TEXT_TMP = INPUT_TEXT_TMP
-    elif 'INPUT_TEXT_TMP' in st.session_state:
-        st.session_state.INPUT_TEXT_TMP = INPUT_TEXT_TMP
+    #if 'INPUT_TEXT_TMP' not in st.session_state:
+        #st.session_state.INPUT_TEXT_TMP = INPUT_TEXT_TMP
+    #elif 'INPUT_TEXT_TMP' in st.session_state:
+        #st.session_state.INPUT_TEXT_TMP = INPUT_TEXT_TMP
     return INPUT_TEXT_TMP
 
 @st.cache_resource
@@ -78,7 +78,7 @@ def generate_code(txt):
 @st.cache_resource
 def generate_test_cases(txt, code):
     # Prompt Template
-    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate specific features and functions of the software. List the test cases as bullet points with Test Case ID, Test Scenario, Test Steps and Expected Results.
+    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate specific features and functions of the software. List the test cases as bullet points. For each of the bullet points include the folowing sub-bullets: Test Case ID, Test Scenario, Test Steps and Expected Results.
     {text}
     {code}
     """
