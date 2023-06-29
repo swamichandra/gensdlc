@@ -1,59 +1,83 @@
-import os, vertexai, streamlit as st
+# Author: Swami Chandrasekaran
+# Last Updated: 06/23/2023
+#
+# This code is meant to serve as a template / boilerplate for building LLM based apps.
+# Feel free to expand, extent and enhance.
+
+import os
+from datetime import datetime
+import vertexai
+import streamlit as st
+from langchain import OpenAI, PromptTemplate
+from langchain.docstore.document import Document
+from langchain.text_splitter import CharacterTextSplitter
+from langchain.llms import VertexAI
+from langchain import PromptTemplate, LLMChain
+from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
-# Streamlit app
-st.set_page_config(page_title="Generative AI for SDLC", page_icon=":random:", layout="wide")
-st.title('👩‍💻 Generative AI for SDLC')
+PROJECT_ID = "learning-351419"  # @param {type:"string"}
+vertexai.init(project=PROJECT_ID, location="us-central1")
+
+def generate_response(txt):
+    PROJECT_ID = "learning-351419"  # @param {type:"string"}
+    vertexai.init(project=PROJECT_ID, location="us-central1")
+
+    # Prompt Template
+    prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
+    {text}
+    """
+    PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
+
+    res = None
+    
+    # Instantiate the LLM model
+    PRIMARY_MODEL = 'text-bison@001'
+    try:
+        llm = VertexAI(model_name=PRIMARY_MODEL, max_output_tokens=506, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+        #llm = VertexAI(model_name=PRIMARY_MODEL)
+        
+        # Text summarization
+        try:
+            chain = LLMChain(prompt=PROMPT, llm=llm)
+            res = chain.run(txt)
+        except Exception as e:
+            st.error("Error during LLM model chaining and invocation")
+            st.error(e)
+    except Exception as e:
+        st.error("Error during LLM model initialization")
+        st.error(e)
+
+    return res
+
+# Page title
+st.set_page_config(page_title="Generative AI Text Summarization App",
+                   page_icon=":random:", layout="centered")
+st.title('📚 Generative AI Text Summarization App')
 
 # Create a file upload widget for the credentials JSON file
-creds_file = st.file_uploader("Upload Google Cloud credentials file", type="json")
+creds_file = st.file_uploader(
+    "Upload Google Cloud credentials file", type="json")
 
-# If the user has uploaded a file, read its contents and set the GOOGLE_APPLICATION_CREDENTIALS environment variable
 if creds_file is not None:
+    now = datetime.now()
+    randomfilename = "temp_credentials_" + now.strftime("%m%d%Y_%H%M%S")
+
     creds_contents = creds_file.read().decode("utf-8")
-    with open("temp_credentials.json", "w") as f:
+    with open(randomfilename, "w") as f:
         f.write(creds_contents)
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "temp_credentials.json"
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = randomfilename
 
-    option = st.selectbox("Select Your Option", ["Answer Question", "Summarize Text"])
+    # Text input
+    txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
 
-    if option == "Answer Question":
-        prompt = st.text_input("Your Input")
+    result = []
+    if st.button("Submit"):
+        with st.spinner('Performing magic ...'):
+            st.info(txt_input)
+            response = generate_response(txt_input.strip())
+            result.append(response)
 
-        if st.button("Submit"):
-            if not prompt.strip():
-                st.write(f"Please submit your question.")
-            else:
-                try:
-                    model = TextGenerationModel.from_pretrained("text-bison@001")
-                    response = model.predict(
-                        prompt,
-                        temperature=0.1,
-                        max_output_tokens=256
-                    )
-
-                    st.success(response)
-                except Exception as e:
-                    st.error(f"An error occurred: {e}")
-
-    elif option == "Summarize Text":
-        source_text = st.text_area("Source Text", height=200)
-        prompt = 'Provide a summary within 200 words for the following article: \n' + source_text + '\nSummary: '
-
-        if st.button("Summarize"):
-            if not source_text.strip():
-                st.write(f"Please provide the text to summarize.")
-            else:
-                try:
-                    model = TextGenerationModel.from_pretrained("text-bison@001")
-                    response = model.predict(
-                        prompt,
-                        temperature=0.2,
-                        max_output_tokens=256,
-                        top_k=40,
-                        top_p=0.8,
-                    )
-
-                    st.success(response)
-                except Exception as e:
-                    st.error(f"An error occurred: {e}")
+    # Display result
+    if len(result):
+        st.write(response)
