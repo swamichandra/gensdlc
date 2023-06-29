@@ -30,7 +30,7 @@ model_name = "text-bison@001"
 vertexai.init(project=project_id, location=loc)
 
 
-#@st.cache_resource
+@st.cache_resource
 def generate_random_input():
     INPUT_TEXT_TMP = ""
     sample_code_gen_qns = [
