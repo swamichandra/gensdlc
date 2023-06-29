@@ -34,7 +34,6 @@ sample_code_gen_qns = ["Generate a semantic HTML and Tailwind CSS Contact Suppor
 INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
 INPUT_TEXT = INPUT_TEXT_TMP
 
-
 def generate_response(txt):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
     vertexai.init(project=PROJECT_ID, location="us-central1")
@@ -112,7 +111,7 @@ if creds_file is not None:
         text_input = st.text_area(
             'Enter your text to summarize', INPUT_TEXT, height=200)
         submit_button = st.form_submit_button(label='Submit')
-        response = generate_response(txt_input.strip())
+        response = generate_response(text_input.strip())
         result.append(response)
 
 # Display result
