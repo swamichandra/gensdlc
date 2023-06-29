@@ -21,7 +21,7 @@ def generate_response(txt):
     try:
         llm = VertexAI()
     except:
-        print ("Error during LLM model initialization ...")
+        st.error("Error during LLM model initialization ...")
 
     # Prompt Template
     prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
@@ -35,7 +35,7 @@ def generate_response(txt):
         chain = LLMChain(prompt=PROMPT, llm=llm)
         res = chain.run(txt)
     except:
-        print ("Error during LLM model chaining and invocation ...")
+        st.error("Error during LLM model chaining and invocation ...")
 
     return res
 
