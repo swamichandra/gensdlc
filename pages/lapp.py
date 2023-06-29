@@ -63,6 +63,7 @@ if creds_file is not None:
     now = datetime.now()
     randomfilename = "temp_credentials_" + now.strftime("%m%d%Y_%H%M%S")
 
+    creds_contents = creds_file.read().decode("utf-8")
     with open(randomfilename, "w") as f:
         f.write(creds_contents)
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = randomfilename
