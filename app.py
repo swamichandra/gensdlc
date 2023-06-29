@@ -104,11 +104,12 @@ if creds_file is not None:
     txt_input = st.text_area('Enter your text to summarize', INPUT_TEXT, height=200)
 
     result = []
-    if st.button("Submit"):
-        with st.spinner('Performing magic ...'):
-            #st.info(txt_input)
-            response = generate_response(txt_input.strip())
-            result.append(response)
+    # Using the "with" syntax
+    with st.form(key='sdlc_form'):
+	    text_input = st.text_area('Enter your text to summarize', INPUT_TEXT, height=200)
+	    submit_button = st.form_submit_button(label='Submit')
+        response = generate_response(txt_input.strip())
+        result.append(response)
 
     # Display result
     if len(result):
