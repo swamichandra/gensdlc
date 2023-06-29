@@ -76,26 +76,25 @@ if creds_file is not None:
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = randomfilename
 
     # Text input
-    inp = '''Convert the below code snippet from JavaScript to TypeScript
-
-function nonRepeatingWords(str1, str2) {
-  const map = new Map();
-  const res = [];
-  // Concatenate the strings
-  const str = str1 + " " + str2;
-  // Count the occurrence of each word
-  str.split(" ").forEach((word) => {
-    map.has(word) ? map.set(word, map.get(word) + 1) : map.set(word, 1);
-  });
-  // Select words which occur only once
-  for (let [key, val] of map) {
-    if (val === 1) {
-      res.push(key);
-    }
-  }
-  return res;
-}
-'''
+    inp = """Convert the below code snippet from JavaScript to TypeScript
+        function nonRepeatingWords(str1, str2) {
+          const map = new Map();
+          const res = [];
+          // Concatenate the strings
+          const str = str1 + " " + str2;
+          // Count the occurrence of each word
+          str.split(" ").forEach((word) => {
+            map.has(word) ? map.set(word, map.get(word) + 1) : map.set(word, 1);
+          });
+          // Select words which occur only once
+          for (let [key, val] of map) {
+            if (val === 1) {
+              res.push(key);
+            }
+          }
+          return res;
+        }
+        """
     txt_input = st.text_area('Enter your text to summarize', inp, height=200)
 
     result = []
