@@ -131,9 +131,9 @@ if creds_file is not None:
     col1, buff, col2 = st.columns([2,1,2])
     
     if submit_button:
-        #result = None
+        result = []
         #response = None
-        #result2 = None
+        result2 = []
         #response2 = None
         with st.spinner('Wait for the magic ...'):
             with col1:
@@ -146,7 +146,7 @@ if creds_file is not None:
                 
             with col2:
                 st.write("place holder for test cases")
-                response2 = generate_test_cases(text_input.strip(), response.strip())
+                response2 = generate_test_cases(text_input.strip(), result.strip())
                 result2.append(response2)
                 
                 # Display test case
