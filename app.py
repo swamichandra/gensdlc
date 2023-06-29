@@ -116,4 +116,4 @@ if creds_file is not None:
     
     # Display result
     if len(result):
-        st.write(result)
+        st.write(response)
