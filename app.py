@@ -49,10 +49,40 @@ def generate_code(txt):
     vertexai.init(project=PROJECT_ID, location="us-central1")
 
     # Prompt Template
-    prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
+    code_gen_prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
     {text}
     """
-    PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
+    PROMPT = PromptTemplate(template=code_gen_prompt_template, input_variables=["text"])
+
+    res = None
+
+    # Instantiate the LLM model
+    try:
+        llm = VertexAI(model_name=primary_model_name, max_output_tokens=506,
+                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+
+        # Text summarization
+        try:
+            chain = LLMChain(prompt=PROMPT, llm=llm)
+            res = chain.run(txt)
+        except Exception as e:
+            st.error("Error during LLM model chaining and invocation")
+            st.error(e)
+    except Exception as e:
+        st.error("Error during LLM model initialization")
+        st.error(e)
+
+    return res
+
+
+@st.cache_resource
+def generate_test_cases(txt):
+    # Prompt Template
+    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases adopting solid testing practices. Add relevant comments. Don't explain the test case, just generate them as bullet points.
+    {text}
+    {code}
+    """
+    PROMPT = PromptTemplate(template=test_case_gen_prompt_template, input_variables=["text", "code"])
 
     res = None
 
@@ -101,14 +131,24 @@ if creds_file is not None:
     col1, buff, col2 = st.columns([2,1,2])
     
     if submit_button:
+        result = None
+        response = None
+        result2 = None
+        response2 = None
         with st.spinner('Wait for the magic ...'):
             with col1:
                 response = generate_code(text_input.strip())
                 result.append(response)
 
-                # Display result
+                # Display code
                 if len(result):
                     st.write(response)
                 
             with col2:
                 st.write("place holder for test cases")
+                response2 = generate_test_cases(text_input.strip(), response.strip())
+                result2.append(response2)
+                
+                # Display test case
+                if len(result2):
+                    st.write(response2)
