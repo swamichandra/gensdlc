@@ -78,7 +78,7 @@ def generate_code(txt):
 @st.cache_resource
 def generate_test_cases(txt, code):
     # Prompt Template
-    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases adopting solid testing practices. Add relevant comments. Don't explain the test case, just generate them as bullet points.
+    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate specific features and functions of the software. List the test cases as bullet points with Test Case ID, Test Scenario, Test Steps and Expected Results.
     {text}
     {code}
     """
