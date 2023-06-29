@@ -15,10 +15,13 @@ from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
-#PROJECT_ID = "learning-351419"  # @param {type:"string"}
-#vertexai.init(project=PROJECT_ID, location="us-central1")
+PROJECT_ID = "learning-351419"  # @param {type:"string"}
+vertexai.init(project=PROJECT_ID, location="us-central1")
 
 def generate_response(txt):
+    PROJECT_ID = "learning-351419"  # @param {type:"string"}
+    vertexai.init(project=PROJECT_ID, location="us-central1")
+
     # Prompt Template
     prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
     {text}
@@ -51,26 +54,16 @@ st.set_page_config(page_title="Generative AI Text Summarization App",
                    page_icon=":random:", layout="centered")
 st.title('📚 Generative AI Text Summarization App')
 
-# Create a file upload widget for the credentials JSON file
-creds_file = st.file_uploader(
-    "Upload Google Cloud credentials file", type="json")
+# Text input
+txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
 
-if creds_file is not None:
-    creds_contents = creds_file.read().decode("utf-8")
-    with open("temp_credentials.json", "w") as f:
-        f.write(creds_contents)
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "temp_credentials.json"
+result = []
+if st.button("Submit"):
+    with st.spinner('Performing magic ...'):
+        st.info(txt_input)
+        response = generate_response(txt_input.strip())
+        result.append(response)
 
-    # Text input
-    txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
-
-    result = []
-    if st.button("Submit"):
-        with st.spinner('Performing magic ...'):
-            st.info(txt_input)
-            response = generate_response(txt_input.strip())
-            result.append(response)
-
-    # Display result
-    if len(result):
-        st.write(response)
+# Display result
+if len(result):
+    st.write(response)
