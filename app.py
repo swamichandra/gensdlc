@@ -35,13 +35,15 @@ def generate_random_input():
     INPUT_TEXT_TMP = ""
     sample_code_gen_qns = [
         "Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", 
-        "Write a JavaScript function. It accepts a full name as input and returns avatar letters.", 
+        "Write a JavaScript function. It accepts a full name as input and returns avatar letters.",
+        "Given a string s, return the longest palindromic substring in s.",
+        "You are given an array of k linked-lists lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
         "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB", 
         "The database has students and course tables. Write a PostgreSQL query to fetch a list of students who are enrolled in at least 3 courses.", "Write a function that checks if a year is a leap year.",
         "You are given a string num, which represents a large integer. You are also given a 0-indexed integer array change of length 10 that maps each digit 0-9 to another digit. More formally, digit d maps to digit change[d]. You may choose to mutate a single substring of num. To mutate a substring, replace each digit num[i] with the digit it maps to in change (i.e. replace num[i] with change[num[i]]).Return a string representing the largest possible integer after mutating (or choosing not to) a single substring of num.",
         "A sentence is a list of words that are separated by a single space with no leading or trailing spaces. Each word consists of lowercase and uppercase English letters. A sentence can be shuffled by appending the 1-indexed word position to each word then rearranging the words in the sentence. For example, the sentence 'This is a sentence' can be shuffled as 'sentence4 a3 is2 This1' or 'is2 sentence4 This1 a3'. Given a shuffled sentence s containing no more than 9 words, reconstruct and return the original sentence.",
         "A company is planning to interview 2n people. Given the array costs where costs[i] = [aCosti, bCosti], the cost of flying the ith person to city a is aCosti, and the cost of flying the ith person to city b is bCosti. Return the minimum cost to fly every person to a city such that exactly n people arrive in each city.",
-        
+        "You are given a license key represented as a string s that consists of only alphanumeric characters and dashes. The string is separated into n + 1 groups by n dashes. You are also given an integer k. We want to reformat the string s such that each group contains exactly k characters, except for the first group, which could be shorter than k but still must contain at least one character. Furthermore, there must be a dash inserted between two groups, and you should convert all lowercase letters to uppercase. Return the reformatted license key.",
         ]
     INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
     return INPUT_TEXT_TMP
