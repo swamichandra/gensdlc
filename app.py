@@ -18,7 +18,7 @@ if creds_file is not None:
     option = st.selectbox("Select Your Option", ["Answer Question", "Summarize Text"])
 
     if option == "Answer Question":
-        prompt = st.text_input("Input", placeholder="Write code to generate prime numbers between 1234 and 6789")
+        prompt = st.text_input("Your Input")
 
         if st.button("Submit"):
             if not prompt.strip():
