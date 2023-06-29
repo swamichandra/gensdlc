@@ -33,8 +33,8 @@ def generate_response(txt):
     # Instantiate the LLM model
     PRIMARY_MODEL = 'text-bison@001'
     try:
-        #llm = VertexAI(model_name=PRIMARY_MODEL, max_output_tokens=256, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
-        llm = VertexAI(model_name=PRIMARY_MODEL)
+        llm = VertexAI(model_name=PRIMARY_MODEL, max_output_tokens=1256, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+        #llm = VertexAI(model_name=PRIMARY_MODEL)
         
         # Text summarization
         try:
@@ -59,12 +59,7 @@ creds_file = st.file_uploader(
     "Upload Google Cloud credentials file", type="json")
 
 if creds_file is not None:
-    creds_contents = creds_file.read().decode("utf-8")
-    with open("temp_credentials.json", "w") as f:
-        f.write(creds_contents)
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "temp_credentials.json"
-    # clear the data in the info file
-    open("temp_credentials.json",'w').close()
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = creds_file.read().decode("utf-8")
 
     # Text input
     txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
