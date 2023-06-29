@@ -16,17 +16,9 @@ from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
 def generate_response(txt):
-    # Split text
-    text_splitter = CharacterTextSplitter()
-    texts = text_splitter.split_text(txt)
-    
-    # Create multiple documents
-    docs = [Document(page_content=t) for t in texts]
-
     # Instantiate the LLM model
     PRIMARY_MODEL = 'text-bison@001'
     llm = VertexAI()
-    #model_name=PRIMARY_MODEL)
     
     # Prompt Template
     prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
@@ -36,7 +28,7 @@ def generate_response(txt):
     
     # Text summarization
     chain = LLMChain(prompt=PROMPT, llm=llm)
-    return chain.run(docs)
+    return chain.run(txt)
 
 # Page title
 st.set_page_config(page_title="Generative AI Text Summarization App", page_icon=":random:", layout="centered")
