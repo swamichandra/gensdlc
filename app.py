@@ -142,6 +142,7 @@ if creds_file is not None:
 
                 # Display code
                 if len(result):
+                    st.subheader("The Code")
                     st.write(response)
                 
             with col2:
@@ -152,4 +153,5 @@ if creds_file is not None:
                 
                 # Display test case
                 if len(result2):
+                    st.subheader("Test Cases")
                     st.write(response2)
