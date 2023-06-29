@@ -29,9 +29,11 @@ location = "us-central1"
 model_name = "text-bison@001"
 vertexai.init(project=project_id, location=loc)
 
-sample_code_gen_qns = ["Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", "Write a JavaScript function. It accepts a full name as input and returns avatar letters.", "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB", "The database has students and course tables. Write a PostgreSQL query to fetch a list of students who are enrolled in at least 3 courses.", "Write a function that checks if a year is a leap year.",]
+sample_code_gen_qns = ["Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", "Write a JavaScript function. It accepts a full name as input and returns avatar letters.",
+                       "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB", "The database has students and course tables. Write a PostgreSQL query to fetch a list of students who are enrolled in at least 3 courses.", "Write a function that checks if a year is a leap year.",]
 INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
 INPUT_TEXT = INPUT_TEXT_TMP
+
 
 def generate_response(txt):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
@@ -44,11 +46,12 @@ def generate_response(txt):
     PROMPT = PromptTemplate(template=prompt_template, input_variables=["text"])
 
     res = None
-    
+
     # Instantiate the LLM model
     try:
-        llm = VertexAI(model_name=primary_model_name, max_output_tokens=506, temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
-       
+        llm = VertexAI(model_name=primary_model_name, max_output_tokens=506,
+                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+
         # Text summarization
         try:
             chain = LLMChain(prompt=PROMPT, llm=llm)
@@ -62,6 +65,7 @@ def generate_response(txt):
 
     return res
 
+
 # Page title
 st.set_page_config(page_title="Generative AI Text Summarization App",
                    page_icon=":random:", layout="centered")
@@ -71,6 +75,7 @@ st.title('📚 Generative AI Text Summarization App')
 creds_file = st.file_uploader(
     "Upload Google Cloud credentials file", type="json")
 
+result = []
 if creds_file is not None:
     now = datetime.now()
     randomfilename = "temp_credentials_" + now.strftime("%m%d%Y_%H%M%S")
@@ -100,17 +105,16 @@ if creds_file is not None:
           return res;
         }
         """
-    
-    txt_input = st.text_area('Enter your text to summarize', INPUT_TEXT, height=200)
 
-    result = []
+    
     # Using the "with" syntax
     with st.form(key='sdlc_form'):
-	text_input = st.text_area('Enter your text to summarize', INPUT_TEXT, height=200)
-	submit_button = st.form_submit_button(label='Submit')
+        text_input = st.text_area(
+            'Enter your text to summarize', INPUT_TEXT, height=200)
+        submit_button = st.form_submit_button(label='Submit')
         response = generate_response(txt_input.strip())
         result.append(response)
 
-    # Display result
-    if len(result):
-        st.write(response)
+# Display result
+if len(result):
+    st.write(result)
