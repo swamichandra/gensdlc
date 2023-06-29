@@ -111,7 +111,7 @@ if creds_file is not None:
         text_input = st.text_area(
             'Enter your text to summarize', INPUT_TEXT, height=200)
         submit_button = st.form_submit_button(label='Submit')
-        with st.spinner('Wait for it...'):
+        with st.spinner('Wait for the magic ...'):
             response = generate_response(text_input.strip())
             result.append(response)
     
@@ -119,3 +119,4 @@ if creds_file is not None:
     if len(result):
         st.write(response)
         INPUT_TEXT_TMP = ""
+        INPUT_TEXT = ""
