@@ -15,19 +15,18 @@ from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
-def generate_response(txt):    
-    PRIMARY_MODEL = 'text-bison@001'
-  
-    # Instantiate the LLM model
-    llm = VertexAI()
-    #model_name=PRIMARY_MODEL)
-    
+def generate_response(txt):
     # Split text
     text_splitter = CharacterTextSplitter()
     texts = text_splitter.split_text(txt)
     
     # Create multiple documents
     docs = [Document(page_content=t) for t in texts]
+
+    # Instantiate the LLM model
+    PRIMARY_MODEL = 'text-bison@001'
+    llm = VertexAI()
+    #model_name=PRIMARY_MODEL)
     
     # Prompt Template
     prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
