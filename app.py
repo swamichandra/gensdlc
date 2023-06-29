@@ -76,12 +76,32 @@ if creds_file is not None:
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = randomfilename
 
     # Text input
-    txt_input = st.text_area('Enter your text to summarize', 'Function to generate prime numbers', height=200)
+    inp = '''Convert the below code snippet from JavaScript to TypeScript
+
+function nonRepeatingWords(str1, str2) {
+  const map = new Map();
+  const res = [];
+  // Concatenate the strings
+  const str = str1 + " " + str2;
+  // Count the occurrence of each word
+  str.split(" ").forEach((word) => {
+    map.has(word) ? map.set(word, map.get(word) + 1) : map.set(word, 1);
+  });
+  // Select words which occur only once
+  for (let [key, val] of map) {
+    if (val === 1) {
+      res.push(key);
+    }
+  }
+  return res;
+}
+'''
+    txt_input = st.text_area('Enter your text to summarize', inp, height=200)
 
     result = []
     if st.button("Submit"):
         with st.spinner('Performing magic ...'):
-            st.info(txt_input)
+            #st.info(txt_input)
             response = generate_response(txt_input.strip())
             result.append(response)
 
