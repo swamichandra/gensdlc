@@ -30,7 +30,7 @@ model_name = "text-bison@001"
 vertexai.init(project=project_id, location=loc)
 
 sample_code_gen_qns = ["Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", "Write a JavaScript function. It accepts a full name as input and returns avatar letters.", "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB", "The database has students and course tables. Write a PostgreSQL query to fetch a list of students who are enrolled in at least 3 courses.", "Write a function that checks if a year is a leap year.",]
-input_text = random.choice(sample_code_gen_qns)
+INPUT_TEXT = random.choice(sample_code_gen_qns)
 
 def generate_response(txt):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
@@ -100,7 +100,7 @@ if creds_file is not None:
         }
         """
     
-    txt_input = st.text_area('Enter your text to summarize', random.choice(sample_code_gen_qns), height=200)
+    txt_input = st.text_area('Enter your text to summarize', INPUT_TEXT, height=200)
 
     result = []
     if st.button("Submit"):
