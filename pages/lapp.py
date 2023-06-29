@@ -15,8 +15,8 @@ from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
-PROJECT_ID = "learning-351419"  # @param {type:"string"}
-vertexai.init(project=PROJECT_ID, location="us-central1")
+#PROJECT_ID = "learning-351419"  # @param {type:"string"}
+#vertexai.init(project=PROJECT_ID, location="us-central1")
 
 def generate_response(txt):
     # Instantiate the LLM model
