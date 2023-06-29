@@ -10,8 +10,8 @@ import streamlit as st
 from langchain import OpenAI, PromptTemplate
 from langchain.docstore.document import Document
 from langchain.text_splitter import CharacterTextSplitter
-from langchain import PromptTemplate, LLMChain
 from langchain.llms import VertexAI
+from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
