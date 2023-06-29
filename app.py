@@ -134,7 +134,7 @@ if creds_file is not None:
     submit_button = st.button('Submit', key='rand1')
     #random_button = st.button('Randomize', key='randrand')
     
-    col1, buff, col2 = st.columns([2,1,2])
+    col1, buff, col2, col3, col4 = st.columns([2,1,2, 1, 1])
     
     #if random_button:
         #text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
@@ -164,3 +164,11 @@ if creds_file is not None:
                 if len(result2):
                     st.subheader("Test Cases")
                     st.write(response2)
+            
+             with col3:
+                st.subheader("Deployment Script")
+                st.write("DevSecOps Coming soon...")
+            
+            with col4:
+                st.subheader("Documentation")
+                st.write("Coming soon...")
