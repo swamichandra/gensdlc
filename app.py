@@ -106,8 +106,8 @@ if creds_file is not None:
     result = []
     # Using the "with" syntax
     with st.form(key='sdlc_form'):
-	    text_input = st.text_area('Enter your text to summarize', INPUT_TEXT, height=200)
-	    submit_button = st.form_submit_button(label='Submit')
+	text_input = st.text_area('Enter your text to summarize', INPUT_TEXT, height=200)
+	submit_button = st.form_submit_button(label='Submit')
         response = generate_response(txt_input.strip())
         result.append(response)
 
