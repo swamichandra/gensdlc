@@ -29,14 +29,22 @@ location = "us-central1"
 model_name = "text-bison@001"
 vertexai.init(project=project_id, location=loc)
 
-INPUT_TEXT_TMP = ""
-sample_code_gen_qns = ["Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", "Write a JavaScript function. It accepts a full name as input and returns avatar letters.",
-                       "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB", "The database has students and course tables. Write a PostgreSQL query to fetch a list of students who are enrolled in at least 3 courses.", "Write a function that checks if a year is a leap year.",]
-INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
-INPUT_TEXT = INPUT_TEXT_TMP
 
 @st.cache_resource
-def generate_response(txt):
+def generate_random_input():
+    INPUT_TEXT_TMP = ""
+    sample_code_gen_qns = ["Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", "Write a JavaScript function. It accepts a full name as input and returns avatar letters.", "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB", "The database has students and course tables. Write a PostgreSQL query to fetch a list of students who are enrolled in at least 3 courses.", "Write a function that checks if a year is a leap year.",]
+    
+    INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
+   
+    if 'INPUT_TEXT_TMP' not in st.session_state:
+        st.session_state.INPUT_TEXT_TMP = INPUT_TEXT_TMP
+    elif 'INPUT_TEXT_TMP' in st.session_state:
+        st.session_state.INPUT_TEXT_TMP = INPUT_TEXT_TMP
+    return INPUT_TEXT_TMP
+
+@st.cache_resource
+def generate_code(txt):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
     vertexai.init(project=PROJECT_ID, location="us-central1")
 
@@ -84,39 +92,23 @@ if creds_file is not None:
     with open(randomfilename, "w") as f:
         f.write(creds_contents)
     os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = randomfilename
-
-    # Text input
-    inp = """Convert the below code snippet from JavaScript to TypeScript
-        function nonRepeatingWords(str1, str2) {
-          const map = new Map();
-          const res = [];
-          // Concatenate the strings
-          const str = str1 + " " + str2;
-          // Count the occurrence of each word
-          str.split(" ").forEach((word) => {
-            map.has(word) ? map.set(word, map.get(word) + 1) : map.set(word, 1);
-          });
-          // Select words which occur only once
-          for (let [key, val] of map) {
-            if (val === 1) {
-              res.push(key);
-            }
-          }
-          return res;
-        }
-        """
     
     # Using the "with" syntax
-    with st.form(key='sdlc_form', clear_on_submit = False):
-        text_input = st.text_area(
-            'Enter your text to summarize', INPUT_TEXT, height=200)
-        submit_button = st.form_submit_button(label='Submit')
-        with st.spinner('Wait for the magic ...'):
-            response = generate_response(text_input.strip())
-            result.append(response)
+    #with st.form(key='sdlc_form', clear_on_submit = False):
+    text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
+    submit_button = st.button('Submit', key='rand1')
     
-    # Display result
-    if len(result):
-        st.write(response)
-        INPUT_TEXT_TMP = ""
-        INPUT_TEXT = ""
+    col1, buff, col2 = st.columns([2,1,2])
+    
+    if submit_button:
+        with st.spinner('Wait for the magic ...'):
+            with col1:
+                response = generate_code(text_input.strip())
+                result.append(response)
+
+                # Display result
+                if len(result):
+                    st.write(response)
+                
+            with col2:
+                st.write("place holder for test cases")
