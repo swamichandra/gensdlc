@@ -138,13 +138,11 @@ if creds_file is not None:
     #with st.form(key='sdlc_form', clear_on_submit = False):
     text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
     submit_button = st.button('Submit', key='rand1')
-    random_button = st.button('Randomize', key='randrand')
+    random_button = st.button('Randomize', key='randrand', on_click=text_input.value = generate_random_input())
+    #st.write(random_button)
     
     col1, buff, col2 = st.columns([2, 1, 2])
     col3, buff, col4, col5 = st.columns([2, 1, 1, 1])
-    
-    if random_button:
-        st.write(st.session_state.catch_rand)
     
     if submit_button:
         result = []
@@ -158,7 +156,6 @@ if creds_file is not None:
             
             with col2:
                 response = generate_code(text_input.strip())
-                st.session_state.catch_rand = response
                 result.append(response)
 
                 # Display code
