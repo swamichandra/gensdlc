@@ -138,7 +138,8 @@ if creds_file is not None:
     submit_button = st.button('Submit', key='rand1')
     #random_button = st.button('Randomize', key='randrand')
     
-    col1, buff, col2, buff, col3, col4, col5 = st.columns([2, 1, 2, 1, 1, 1, 1])
+    col1, buff, col2 = st.columns([2, 1, 2])
+    col3, buff, col4, col5 = st.columns([2, 1, 1, 1])
     
     #if random_button:
         #text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
@@ -149,11 +150,11 @@ if creds_file is not None:
         result2 = []
         response2 = None
         with st.spinner('Wait for the magic ...'):
-            with col5:
-                st.subheader("Product Feature Backlog")
+            with col1:
+                st.subheader("Feature Backlog")
                 st.write("Coming soon...")
             
-            with col1:
+            with col2:
                 response = generate_code(text_input.strip())
                 result.append(response)
 
@@ -162,7 +163,7 @@ if creds_file is not None:
                     st.subheader("The Code")
                     st.write(response)
                 
-            with col2:
+            with col3:
                 #st.write("place holder for test cases")
                 #st.write(response)
                 response2 = generate_test_cases(text_input.strip(), response)
@@ -173,10 +174,10 @@ if creds_file is not None:
                     st.subheader("Test Cases")
                     st.write(response2)
             
-            with col3:
+            with col4:
                 st.subheader("Deployment Script")
                 st.write("DevSecOps Coming soon...")
             
-            with col4:
+            with col5:
                 st.subheader("Documentation")
                 st.write("Coming soon...")
