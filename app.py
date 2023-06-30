@@ -137,10 +137,16 @@ if creds_file is not None:
     
     # Using the "with" syntax
     #with st.form(key='sdlc_form', clear_on_submit = False):
-    text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
+    txtbox = st.empty()
+    txtbox.text_area('Tell me about your app', generate_random_input(), height=200)
+    #text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
     submit_button = st.button('Submit', key='rand1')
-    #random_button = st.button('Randomize', key='randrand', on_click=text_input.value = generate_random_input())
-    #st.write(random_button)
+    
+    random_button = st.button('Randomize')
+    if random_button:
+        txtbox.text_area('Tell me about your app', generate_random_input(), height=200)
+    
+    
     
     col1, buff, col2 = st.columns([2, 1, 2])
     col3, buff, col4, col5 = st.columns([2, 1, 1, 1])
