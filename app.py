@@ -3,7 +3,7 @@
 #
 # This code is meant to serve as a template / boilerplate for building LLM based apps.
 # Feel free to expand, extent and enhance.
-
+import css
 import os
 import random
 from datetime import datetime
@@ -116,8 +116,8 @@ def generate_test_cases(txt, code):
     return res
 
 # Page title
-st.set_page_config(page_title="Generative AI Text Summarization App",
-                   page_icon=":random:", layout="centered")
+st.set_page_config(page_title="Generative AI Text Summarization App", page_icon=":random:", layout="centered")
+st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
 st.title('📚 Generative AI Text Summarization App')
 
 # Create a file upload widget for the credentials JSON file
