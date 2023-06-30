@@ -140,8 +140,7 @@ if creds_file is not None:
     #txtbox = st.empty()
     #txtbox.text_area('Tell me about your app', generate_random_input(), height=200)
 
-    #text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
-    text_input = st.text_area('Tell me about your app', problem, height=200, key='fav1')
+    text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
     submit_button = st.button('Submit', key='rand1')
     
     #random_button = st.button('Randomize')
