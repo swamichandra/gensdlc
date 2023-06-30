@@ -17,6 +17,11 @@ from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
 from vertexai.preview.language_models import TextGenerationModel
 
+# Page title
+st.set_page_config(page_title="SDLC powered by Generative A.I", page_icon=":random:", layout="centered")
+st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
+st.title('📚 SDLC powered by Generative A.I')
+
 # Global Settings and Config
 project_id = "learning-351419"
 loc = "us-central1"
@@ -114,11 +119,6 @@ def generate_test_cases(txt, code):
         st.error(e)
 
     return res
-
-# Page title
-st.set_page_config(page_title="Generative AI Text Summarization App", page_icon=":random:", layout="centered")
-st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
-st.title('📚 Generative AI Text Summarization App')
 
 # Create a file upload widget for the credentials JSON file
 creds_file = st.file_uploader(
