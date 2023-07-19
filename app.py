@@ -270,7 +270,7 @@ if submit_button:
                 st.write(response_code)
             
         with tab2:
-            response_api = generate_api(text_input.strip())
+            response_api = generate_api(text_input.strip(), response_prod_backlog)
             result_api.append(response_api)
 
             # Display api
