@@ -172,7 +172,15 @@ def generate_test_cases(txt, code):
     {code}
     """
     
-    PROMPT2 = PromptTemplate(template=test_case_gen_prompt_template, input_variables=["text", "code"])
+    test_case_gen_prompt_template = """Generate a comprehensive test plan and test cases based on the requirements and code below. I want the results as a table with columns: Test Case ID, Description, Input Data, Expected Result, Status
+
+    Read through the provided app description and codebase below. Identify key user flows, edge cases, and failure scenarios. Create detailed test cases to validate all critical parts of the app - user interface, APIs, databases, security, payments etc. Ensure test coverage for positive, negative, boundary and exceptional scenarios. Write clear test case descriptions summarizing steps. Define appropriate input data and expected results for each case. Create test data sets that are valid, invalid, empty, extremely large etc. Group related cases into test suites for different app modules and functions. Develop a high level test plan outlining the scope, timelines, environments, team roles and responsibilities. Provide end-to-end regression test suite to verify overall app integrity. Simulate real world usage and data. Follow best practices for test planning, documentation and coverage.
+    
+    {text}
+    {code}
+    """
+    
+    PROMPTtestcase = PromptTemplate(template=test_case_gen_prompt_template, input_variables=["text", "code"])
 
     res = None
 
@@ -183,7 +191,7 @@ def generate_test_cases(txt, code):
 
         # Text summarization
         try:
-            chain = LLMChain(prompt=PROMPT2, llm=llm2)
+            chain = LLMChain(prompt=PROMPTtestcase, llm=llm2)
             res = chain.run({'text':txt, 'code':code})
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
@@ -236,7 +244,7 @@ submit_button = st.button('Submit')
 
 
 if submit_button:
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Product Backlog", "Generated Code", "API's", "Test Cases", "Deployment Script", "Documentation"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Product Backlog", "API's", "Generated Code", "Test Cases", "Deployment Script", "Documentation"])
     
     #st.write(lang_option)
     result_code = []
@@ -259,7 +267,7 @@ if submit_button:
                 st.subheader("Feature Backlog")
                 st.write(response_prod_backlog)
         
-        with tab2:
+        with tab3:
             response_code = generate_code(text_input.strip(), lang_option)
             result_code.append(response_code)
 
@@ -268,7 +276,7 @@ if submit_button:
                 st.subheader("The Code")
                 st.write(response_code)
             
-        with tab3:
+        with tab2:
             response_api = generate_api(text_input.strip())
             result_api.append(response_api)
 
