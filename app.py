@@ -75,6 +75,15 @@ def generate_code(txt, lang_option):
     code_gen_prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid {lang_option} programming practices. Add relevant code comments. Don't explain the code, just generate the code.
     {text}
     """
+    
+    code_gen_prompt_template = """
+    Generate clean, well-structured {lang_option} code based on the requirements described below. Follow best practices for coding style, naming conventions, modularity, and documentation.
+
+    Use proper indentation, spacing, and formatting to maximize readability. Apply precise descriptive names for variables, functions, classes, and files. Modularize functionality into reusable components with clear interfaces. Validate all inputs and handle errors gracefully. Include comprehensive comments and docstrings explaining logic and complex sections. Follow recommended coding guidelines and style guides for the language. Implement logging, error handling, and debuggable code.
+
+    Structure the classes and functions logically to minimize complexity. Break code into small, single-responsibility functions. Use optimal data structures and algorithms to ensure efficiency. Write secure code free from vulnerabilities and risks. Test the code thoroughly covering edge cases. Focus on maintainability, scalability, and extensibility. Apply principles of good API design for interfaces. Generate clean, well-organized code that is compliant, functional, readable and production-ready.
+    """
+    
     PROMPT = PromptTemplate(template=code_gen_prompt_template, input_variables=["text", "lang_option"])
 
     res = None
