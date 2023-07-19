@@ -10,7 +10,7 @@ div.stButton > button {
 }
 
 div.stButton > button:hover {
-    color:#fff;background-color:#bf470a;border-color:#bf470a
+    color:#fff;background-color:#17D7EA;border-color:#16B6C6
 }
 
 .small-font {
