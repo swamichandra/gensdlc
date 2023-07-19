@@ -125,10 +125,11 @@ def generate_product_backlog(txt):
 @st.cache_resource
 def generate_test_cases(txt, code):
     # Prompt Template
-    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate features and functions. List the test cases ONLY as bullet points. For each of the bullet points include the folowing as nicely formatted sub-bullets: Test Case ID, Test Scenario, Test Steps and Expected Results.
+    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate features and functions. List the test cases ONLY as as well formatted bullet points. For each of the bullet points include the folowing: Test Case ID, Test Scenario, Test Steps and Expected Results.
     {text}
     {code}
     """
+    
     PROMPT2 = PromptTemplate(template=test_case_gen_prompt_template, input_variables=["text", "code"])
 
     res = None
