@@ -156,7 +156,7 @@ def generate_test_cases(txt, code):
 @st.cache_resource
 def generate_documentation(txt, backlog, code):
     # Prompt Template
-    doc_gen_prompt_template = """You are a master technical writer. Based on the requirements, backlog and code provided below, generate readthedocs style product documentation. Include the following: README, Detailed Description of the project, Installation Instructions, API Documentation, Getting Started. Generate text version only.
+    doc_gen_prompt_template = """You are a master technical writer. Based on the requirements, backlog and code provided below, generate readthedocs style product documentation. Include the following: README, Detailed Description, Installation Instructions, API Documentation, Getting Started. Generate text version only.
     {text}
     {backlog}
     {code}
