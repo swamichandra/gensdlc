@@ -174,6 +174,8 @@ if creds_file is not None:
     if submit_button:
         result = []
         response = None
+        result2 = []
+        response2 = None
         result3 = []
         response3 = None
         with st.spinner('Wait for the magic ...'):
