@@ -124,6 +124,35 @@ def generate_product_backlog(txt):
     return res
 
 @st.cache_resource
+def generate_api(txt):
+    # Prompt Template
+    api_gen_prompt_template = """You are a master API designer and develop. Based on the requirements provided below, generate a list of API's including the input and output parameters. List the API's ONLY as bullet points.
+    {text}
+    """
+    
+    PROMPTapi = PromptTemplate(template=api_gen_prompt_template, input_variables=["text"])
+
+    res = None
+    # Instantiate the LLM model
+    try:
+        llmapi = VertexAI(model_name=primary_model_name, max_output_tokens=506,
+                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+
+        # Text summarization
+        try:
+            chain = LLMChain(prompt=PROMPTapi, llm=llmapi)
+            res = chain.run({'text':txt})
+        except Exception as e:
+            st.error("Error during LLM model chaining and invocation")
+            st.error(e)
+    except Exception as e:
+        st.error("Error during LLM model initialization")
+        st.error(e)
+
+    return res
+
+
+@st.cache_resource
 def generate_test_cases(txt, code):
     # Prompt Template
     test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate features and functions. List the test cases ONLY with the following Test Case ID, Test Scenario, Test Steps and Expected Results. Well format each of the bullet points and ensure they can be visually read well.
@@ -206,6 +235,8 @@ if submit_button:
     response_prod_backlog = None
     result_doc = []
     response_doc = None
+    result_api = []
+    response_api = None
     with st.spinner('Wait for the magic ...'):
         with tab1:
             response_prod_backlog = generate_product_backlog(text_input.strip())
@@ -227,7 +258,13 @@ if submit_button:
             
         with tab3:
             st.subheader("API's")
-            st.write("Coming soon...")
+            response_api = generate_code(text_input.strip(), lang_option)
+            result_api.append(response_api)
+
+            # Display api
+            if len(result_api):
+                st.subheader("The Code")
+                st.write(response_api)
             
         with tab4:
             response_test_case = generate_test_cases(text_input.strip(), response_code.strip())
