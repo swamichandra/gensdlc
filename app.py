@@ -77,7 +77,7 @@ def generate_code(txt, lang_option):
     """
     
     code_gen_prompt_template = """
-    Generate clean, well-structured {lang_option} code based on the requirements described below. Follow best practices for coding style, naming conventions, modularity, and documentation.
+    Generate clean, well-structured code based on the requirements described below. Follow best practices for {lang_option} coding style, naming conventions, modularity, and documentation.
 
     Use proper indentation, spacing, and formatting to maximize readability. Apply precise descriptive names for variables, functions, classes, and files. Modularize functionality into reusable components with clear interfaces. Validate all inputs and handle errors gracefully. Include comprehensive comments and docstrings explaining logic and complex sections. Follow recommended coding guidelines and style guides for the language. Implement logging, error handling, and debuggable code.
 
