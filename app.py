@@ -246,6 +246,13 @@ submit_button = st.button('Submit')
 
 
 if submit_button:
+    # states
+    BACKLOG_GEN = False
+    API_GEN = False
+    CODE_GEN = False
+    TESTCASE_GEN = False
+    DOC_GEN = False
+    
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Product Backlog", "API's", "Generated Code", "Test Cases", "Deployment Script", "Documentation"])
     
     #st.write(lang_option)
@@ -268,6 +275,7 @@ if submit_button:
             if len(result_prod_backlog):
                 st.subheader("Feature Backlog")
                 st.write(response_prod_backlog)
+                BACKLOG_GEN = True
         
         with tab3:
             response_code = generate_code(text_input.strip(), lang_option)
@@ -277,34 +285,41 @@ if submit_button:
             if len(result_code):
                 st.subheader("The Code")
                 st.write(response_code)
+                CODE_GEN = True
             
         with tab2:
-            response_api = generate_api(text_input.strip(), response_prod_backlog)
-            result_api.append(response_api)
+            if BACKLOG_GEN:
+                response_api = generate_api(text_input.strip(), response_prod_backlog)
+                result_api.append(response_api)
 
             # Display api
             if len(result_api):
                 st.subheader("API's")
                 st.write(response_api)
+                API_GEN = True
             
         with tab4:
-            response_test_case = generate_test_cases(text_input.strip(), response_prod_backlog)
-            result_test_case.append(response_test_case)
+            if BACKLOG_GEN:
+                response_test_case = generate_test_cases(text_input.strip(), response_prod_backlog)
+                result_test_case.append(response_test_case)
             
             # Display test case
             if len(result_test_case):
                 st.subheader("Test Cases")
                 st.write(response_test_case)
+                TESTCASE_GEN = True
         
         with tab5:
             st.subheader("Deployment Script")
             st.write("DevSecOps Coming soon...")
         
         with tab6:
-            response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
-            result_doc.append(response_doc)
+            if CODE_GEN and BACKLOG_GEN:
+                response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
+                result_doc.append(response_doc)
             
             # Display documentation
             if len(result_doc):
                 st.subheader("Documentation")
                 st.write(response_doc)
+                DOC_GEN = True
