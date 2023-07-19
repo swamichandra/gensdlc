@@ -15,12 +15,13 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.llms import VertexAI
 from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
+from google.oauth2 import service_account
 from vertexai.preview.language_models import TextGenerationModel
 
 # Page title
-st.set_page_config(page_title="SDLC powered by Generative A.I", page_icon=":random:", layout="wide")
+st.set_page_config(page_title="SDLC powered by GCP Vertex Generative A.I", page_icon=":random:", layout="wide")
 st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
-st.title('👩‍💻 SDLC powered by GCP Vertex Generative A.I')
+st.title('👩‍💻 SDLC powered by Generative A.I')
 
 # Global Settings and Config
 project_id = "learning-351419"
@@ -32,7 +33,13 @@ top_p = 0.8
 top_k = 40
 location = "us-central1"
 model_name = "text-bison@001"
-vertexai.init(project=project_id, location=loc)
+
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+
+vertexai.init(project=project_id, location=loc, credentials=credentials)
 
 
 @st.cache_resource
