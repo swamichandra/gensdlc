@@ -153,6 +153,37 @@ def generate_test_cases(txt, code):
 
     return res
 
+@st.cache_resource
+def generate_documentation(txt, backlog, code):
+    # Prompt Template
+    doc_gen_prompt_template = """You are a master technical writer. Based on the requirements, backlog and code provided below, generate readthedocs style product documentation. Organize the coeumtnation into sections and sub-sections. Generate text version only.
+    {text}
+    {backlog}
+    {code}
+    """
+    
+    PROMPTdoc = PromptTemplate(template=doc_gen_prompt_template, input_variables=["text", "backlog", "code"])
+
+    res = None
+
+    # Instantiate the LLM model
+    try:
+        llmcode = VertexAI(model_name=primary_model_name, max_output_tokens=506,
+                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+
+        # Text summarization
+        try:
+            chain = LLMChain(prompt=PROMPTdoc, llm=llmcode)
+            res = chain.run({'text':txt, 'backlog': backlog, 'code':code})
+        except Exception as e:
+            st.error("Error during LLM model chaining and invocation")
+            st.error(e)
+    except Exception as e:
+        st.error("Error during LLM model initialization")
+        st.error(e)
+
+    return res
+
 # Create a file upload widget for the credentials JSON file
 creds_file = st.file_uploader(
     "Upload Google Cloud credentials file", type="json")
@@ -188,6 +219,8 @@ if creds_file is not None:
         response_test_case = None
         result_prod_backlog = []
         response_prod_backlog = None
+        result_doc = []
+        response_doc = None
         with st.spinner('Wait for the magic ...'):
             with col1:
                 response_prod_backlog = generate_product_backlog(text_input.strip())
@@ -223,5 +256,10 @@ if creds_file is not None:
                 st.write("DevSecOps Coming soon...")
             
             with col5:
-                st.subheader("Documentation")
-                st.write("Coming soon...")
+                response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
+                result_doc.append(response_doc)
+                
+                # Display test case
+                if len(result_doc):
+                    st.subheader("Documentation")
+                    st.write(response_doc)
