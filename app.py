@@ -193,10 +193,10 @@ lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaS
 
 submit_button = st.button('Submit')
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Product Backlog", "Generated Code", "Test Cases", "Deployment Script", "Documentation"])
-
 
 if submit_button:
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Product Backlog", "Generated Code", "Test Cases", "Deployment Script", "Documentation"])
+    
     #st.write(lang_option)
     result_code = []
     response_code = None
