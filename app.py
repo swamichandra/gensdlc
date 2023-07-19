@@ -234,8 +234,12 @@ def generate_documentation(txt, backlog, code):
 result_code = []
 # Using the "with" syntax
 #with st.form(key='sdlc_form', clear_on_submit = False):
-text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
+text_input = st.text_area('Tell me about your app')
+button_random = st.button("Randomize App")
 
+if button_random:
+    text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
+    
 lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
 
 submit_button = st.button('Submit')
