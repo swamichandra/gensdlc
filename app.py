@@ -126,7 +126,7 @@ def generate_product_backlog(txt):
 @st.cache_resource
 def generate_api(txt):
     # Prompt Template
-    api_gen_prompt_template = """You are a master API designer and develop. Based on the requirements provided below, generate a list of API's including the input and output parameters. List the API's ONLY as bullet points.
+    api_gen_prompt_template = """You are a master API designer and develop. Based on the requirements provided below and using leading practices for domain driven API design, come up with a list of API's including the input and output parameters. List the API's ONLY as bullet points.
     {text}
     """
     
@@ -155,7 +155,7 @@ def generate_api(txt):
 @st.cache_resource
 def generate_test_cases(txt, code):
     # Prompt Template
-    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate features and functions. List the test cases ONLY with the following Test Case ID, Test Scenario, Test Steps and Expected Results. Well format each of the bullet points and ensure they can be visually read well.
+    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate features and functions. List the test cases ONLY asa table with the following Test Case ID, Test Scenario, Test Steps and Expected Results.
     {text}
     {code}
     """
