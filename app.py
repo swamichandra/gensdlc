@@ -26,7 +26,7 @@ st.title('👩‍💻 SDLC powered by Generative A.I')
 project_id = "learning-351419"
 loc = "us-central1"
 primary_model_name = "text-bison@001"
-temperature = 0.2
+temperature = 0.3
 max_output_tokens = 1024
 top_p = 0.8
 top_k = 40
