@@ -155,7 +155,7 @@ def generate_test_cases(txt, code):
 creds_file = st.file_uploader(
     "Upload Google Cloud credentials file", type="json")
 
-result = []
+result_code = []
 if creds_file is not None:
     now = datetime.now()
     randomfilename = "temp_credentials_" + now.strftime("%m%d%Y_%H%M%S")
@@ -169,9 +169,7 @@ if creds_file is not None:
     #with st.form(key='sdlc_form', clear_on_submit = False):
     text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
     
-    lang_option = st.radio(
-     "Target Programming Language:",
-     ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
+    lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
     
     submit_button = st.button('Submit')
     
@@ -182,41 +180,41 @@ if creds_file is not None:
     
     if submit_button:
         #st.write(lang_option)
-        result = []
-        response = None
-        result2 = []
-        response2 = None
-        result3 = []
-        response3 = None
+        result_code = []
+        response_code = None
+        result_test_case = []
+        response_test_case = None
+        result_prod_backlog = []
+        response_prod_backlog = None
         with st.spinner('Wait for the magic ...'):
             with col1:
-                response3 = generate_product_backlog(text_input.strip())
-                result3.append(response3)
+                response_prod_backlog = generate_product_backlog(text_input.strip())
+                result_prod_backlog.append(response_prod_backlog)
                 
                 # Display backlog
-                if len(result3):
+                if len(result_prod_backlog):
                     st.subheader("Feature Backlog")
-                    st.write(response3)
+                    st.write(response_prod_backlog)
             
             with col2:
-                response = generate_code(text_input.strip(), lang_option)
-                result.append(response)
+                response_code = generate_code(text_input.strip(), lang_option)
+                result_code.append(response_code)
 
                 # Display code
-                if len(result):
+                if len(result_code):
                     st.subheader("The Code")
-                    st.write(response)
+                    st.write(response_code)
                 
             with col3:
                 #st.write("place holder for test cases")
-                #st.write(response)
-                response2 = generate_test_cases(text_input.strip(), response)
-                result2.append(response2)
+                #st.write(response_code)
+                response_test_case = generate_test_cases(text_input.strip(), response_code)
+                result_test_case.append(response_test_case)
                 
                 # Display test case
-                if len(result2):
+                if len(result_test_case):
                     st.subheader("Test Cases")
-                    st.write(response2)
+                    st.write(response_test_case)
             
             with col4:
                 st.subheader("Deployment Script")
