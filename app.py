@@ -42,12 +42,12 @@ credentials = service_account.Credentials.from_service_account_info(
 vertexai.init(project=project_id, location=loc, credentials=credentials)
 
 
-@st.cache_resource
+#@st.cache_resource
 def generate_random_input():
     INPUT_TEXT_TMP = ""
     sample_code_gen_qns = [
         "Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", 
-        "Write a JavaScript function. It accepts a full name as input and returns avatar letters.",
+        "Write a that accepts a full name as input and returns avatar letters.",
         "Social food delivery app: Satisfy your cravings while supporting local businesses with a social food delivery app. Discover a wide range of culinary delights from nearby restaurants and food vendors. Engage with a community of food enthusiasts, share recommendations, and enjoy exclusive deals. Experience the joy of delicious food delivered right to your doorstep, all while fostering connections within your local food scene.",
         "An app to manage everyday tasks and items. This could include features such as adding tasks, deleting tasks, marking tasks as completed, and setting due dates for tasks.",
         "An app that can display the current weather conditions and forecast for a specific location. This could include features such as showing the temperature, humidity, wind speed, and precipitation.",
@@ -66,7 +66,7 @@ def generate_random_input():
     INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
     return INPUT_TEXT_TMP
 
-@st.cache_resource
+#@st.cache_resource
 def generate_code(txt, lang_option):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
     vertexai.init(project=PROJECT_ID, location="us-central1")
@@ -106,7 +106,7 @@ def generate_code(txt, lang_option):
 
     return res
 
-@st.cache_resource
+#@st.cache_resource
 def generate_product_backlog(txt):
     # Prompt Template
     prod_backlog_gen_prompt_template = """You are a master product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and a list of asscoiated features. Assign a level of priority (High, Medium, Low) for each of the features. Include non-functional epics and features as well. List the backlog as a table with the following: Epic Name, Features, and Priority.
@@ -141,7 +141,7 @@ def generate_product_backlog(txt):
 
     return res
 
-@st.cache_resource
+#@st.cache_resource
 def generate_api(txt, backlog):
     # Prompt Template
     api_gen_prompt_template = """Based on the requirements below generate a lit of RESTful API's. Create definitions that follows domain drive API best practices. Use descriptive names and consistent conventions. Include HTTP methods, endpoint paths, request and response examples in JSON format. Document all endpoints thoroughly explaining the functionality, required parameters, sample requests/responses and error conditions. Implement proper authentication, input validation, error handling, rate limiting, and idempotent endpoints. Provide sensible defaults and optional parameters where applicable. Make the API intuitive and easy to use. Focus on simplicity without unnecessary complexity in the design. Use proper versioning and pagination. Follow REST principles and HTTP standards.
@@ -171,7 +171,7 @@ def generate_api(txt, backlog):
     return res
 
 
-@st.cache_resource
+#@st.cache_resource
 def generate_test_cases(txt, backlog):
     # Prompt Template    
     test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table with columns: Test Case ID, Test Type, Description, Input Data, Expected Result
@@ -204,7 +204,7 @@ def generate_test_cases(txt, backlog):
 
     return res
 
-@st.cache_resource
+#@st.cache_resource
 def generate_documentation(txt, backlog, code):
     # Prompt Template
     doc_gen_prompt_template = """You are a master technical writer. Based on the requirements, backlog and code provided below, generate readthedocs style product documentation. Include the following: README, Detailed Description, Installation Instructions, API Documentation, Getting Started. Generate text version only.
