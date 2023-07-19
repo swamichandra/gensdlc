@@ -91,8 +91,7 @@ def generate_code(txt, lang_option):
 
     # Instantiate the LLM model
     try:
-        llm = VertexAI(model_name=primary_model_name, max_output_tokens=506,
-                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+        llm = VertexAI(model_name=primary_model_name, max_output_tokens=506, temperature=temperature, top_p=top_p, top_k=top_k, verbose=True,)
 
         # Text summarization
         try:
@@ -126,12 +125,11 @@ def generate_product_backlog(txt):
 
     # Instantiate the LLM model
     try:
-        llm3 = VertexAI(model_name=primary_model_name, max_output_tokens=506,
-                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+        llmbacklog = VertexAI(model_name=primary_model_name, max_output_tokens=506, temperature=temperature, top_p=top_p, top_k=top_k, verbose=True,)
 
         # Text summarization
         try:
-            chain = LLMChain(prompt=PROMPTbacklog, llm=llm3)
+            chain = LLMChain(prompt=PROMPTbacklog, llm=llmbacklog)
             res = chain.run({'text':txt})
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
@@ -155,8 +153,7 @@ def generate_api(txt, backlog):
     res = None
     # Instantiate the LLM model
     try:
-        llmapi = VertexAI(model_name=primary_model_name, max_output_tokens=506,
-                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+        llmapi = VertexAI(model_name=primary_model_name, max_output_tokens=506, temperature=temperature, top_p=top_p, top_k=top_k, verbose=True,)
 
         # Text summarization
         try:
@@ -189,8 +186,7 @@ def generate_test_cases(txt, backlog):
 
     # Instantiate the LLM model
     try:
-        llmtestcase = VertexAI(model_name=primary_model_name, max_output_tokens=506,
-                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+        llmtestcase = VertexAI(model_name=primary_model_name, max_output_tokens=506, temperature=temperature, top_p=top_p, top_k=top_k, verbose=True,)
 
         # Text summarization
         try:
@@ -220,8 +216,7 @@ def generate_documentation(txt, backlog, code):
 
     # Instantiate the LLM model
     try:
-        llmcode = VertexAI(model_name=primary_model_name, max_output_tokens=506,
-                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+        llmcode = VertexAI(model_name=primary_model_name, max_output_tokens=506, temperature=temperature, top_p=top_p, top_k=top_k, verbose=True,)
 
         # Text summarization
         try:
