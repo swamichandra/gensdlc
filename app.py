@@ -64,7 +64,7 @@ def generate_random_input():
     return INPUT_TEXT_TMP
 
 @st.cache_resource
-def generate_code(txt, code_lang):
+def generate_code(txt, lang_option):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
     vertexai.init(project=PROJECT_ID, location="us-central1")
 
@@ -84,7 +84,7 @@ def generate_code(txt, code_lang):
         # Text summarization
         try:
             chain = LLMChain(prompt=PROMPT, llm=llm)
-            res = chain.run(txt)
+            res = chain.run(txt, lang_option)
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
             st.error(e)
@@ -181,7 +181,7 @@ if creds_file is not None:
     col5, buf = st.columns([1, 1])
     
     if submit_button:
-        st.write(lang_option)
+        #st.write(lang_option)
         result = []
         response = None
         result2 = []
