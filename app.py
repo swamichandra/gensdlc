@@ -58,7 +58,8 @@ def generate_random_input():
         "The purpose of the online flight management system is to ease flight management and to create a convenient and easy-to-use application for passengers, trying to buy airline tickets. The system is based on a relational database with its flight management and reservation functions. We will have a database server supporting hundreds of major cities around the world as well as thousands of flights by various airline companies. Above all, we hope to provide a comfortable user experience along with the best pricing available.",
         "Simple Library Management System using which a librarian can add book details like ISBN number, book title, author name, edition, and publication details through a web page. In addition to this, the librarian or any user can search for the available books in the library by the book name. If book details are present in the database, the search details are displayed.",
         "Container tracking app: Streamline your logistics operations with a container tracking application. Track the movement of your shipments in real time, ensuring transparency and efficiency throughout the supply chain. Get instant updates on container status, location, and estimated arrival times. Simplify the management of your cargo and enhance collaboration with shipping partners, empowering you to stay ahead in the global marketplace.",
-        "Bike servicing app: A door-step bike servicing platform and application which will use technology for the convenience of two-wheeler owners by providing them a transparent connection with high-quality vehicle maintenance providers. The platform can provide assisted door-step pick-up and drop, an in-built inventory management system that enables reduction of waiting-time, smarter stock allocation, an order management system etc."
+        "Bike servicing app: A door-step bike servicing platform and application which will use technology for the convenience of two-wheeler owners by providing them a transparent connection with high-quality vehicle maintenance providers. The platform can provide assisted door-step pick-up and drop, an in-built inventory management system that enables reduction of waiting-time, smarter stock allocation, an order management system etc.",
+        "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals.",
         
     
     ]
@@ -109,7 +110,7 @@ def generate_product_backlog(txt):
     {text}
     """    
     
-    PROMPT3 = PromptTemplate(template=prod_backlog_gen_prompt_template, input_variables=["text"])
+    PROMPTbacklog = PromptTemplate(template=prod_backlog_gen_prompt_template, input_variables=["text"])
 
     res = None
 
@@ -120,7 +121,7 @@ def generate_product_backlog(txt):
 
         # Text summarization
         try:
-            chain = LLMChain(prompt=PROMPT3, llm=llm3)
+            chain = LLMChain(prompt=PROMPTbacklog, llm=llm3)
             res = chain.run({'text':txt})
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
@@ -134,10 +135,6 @@ def generate_product_backlog(txt):
 @st.cache_resource
 def generate_api(txt):
     # Prompt Template
-    api_gen_prompt_template = """You are a master API designer and develop. Based on the requirements provided below and using leading practices for domain driven API design, come up with a list of API's including the input and output parameters. List the API's ONLY as bullet points.
-    {text}
-    """
-    
     api_gen_prompt_template = """Based on the requirements below generate a RESTful API definition that follows domain drive API best practices. Use descriptive names and consistent conventions. Include HTTP methods, endpoint paths, request and response examples in JSON format. Document all endpoints thoroughly explaining the functionality, required parameters, sample requests/responses and error conditions. Implement proper authentication, input validation, error handling, rate limiting, and idempotent endpoints. Provide sensible defaults and optional parameters where applicable. Make the API intuitive and easy to use. Focus on simplicity without unnecessary complexity in the design. Use proper versioning and pagination. Follow REST principles and HTTP standards.
     {text}
     """
@@ -172,7 +169,7 @@ def generate_test_cases(txt, code):
     {code}
     """
     
-    test_case_gen_prompt_template = """Generate a comprehensive test plan and test cases based on the requirements and code below. I want the results as a table with columns: Test Case ID, Description, Input Data, Expected Result, Status
+    test_case_gen_prompt_template = """Based on the requirements and code provided below generate a comprehensive test plan and associated test cases. I want the results as a table with the following columns: Test Case ID, Description, Input Data, Expected Result, Status
 
     Read through the provided app description and codebase below. Identify key user flows, edge cases, and failure scenarios. Create detailed test cases to validate all critical parts of the app - user interface, APIs, databases, security, payments etc. Ensure test coverage for positive, negative, boundary and exceptional scenarios. Write clear test case descriptions summarizing steps. Define appropriate input data and expected results for each case. Create test data sets that are valid, invalid, empty, extremely large etc. Group related cases into test suites for different app modules and functions. Develop a high level test plan outlining the scope, timelines, environments, team roles and responsibilities. Provide end-to-end regression test suite to verify overall app integrity. Simulate real world usage and data. Follow best practices for test planning, documentation and coverage.
     
