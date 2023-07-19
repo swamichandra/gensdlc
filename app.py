@@ -82,6 +82,7 @@ def generate_code(txt, lang_option):
     Use proper indentation, spacing, and formatting to maximize readability. Apply precise descriptive names for variables, functions, classes, and files. Modularize functionality into reusable components with clear interfaces. Validate all inputs and handle errors gracefully. Include comprehensive comments and docstrings explaining logic and complex sections. Follow recommended coding guidelines and style guides for the language. Implement logging, error handling, and debuggable code.
 
     Structure the classes and functions logically to minimize complexity. Break code into small, single-responsibility functions. Use optimal data structures and algorithms to ensure efficiency. Write secure code free from vulnerabilities and risks. Test the code thoroughly covering edge cases. Focus on maintainability, scalability, and extensibility. Apply principles of good API design for interfaces. Generate clean, well-organized code that is compliant, functional, readable and production-ready.
+    {text}
     """
     
     PROMPT = PromptTemplate(template=code_gen_prompt_template, input_variables=["text", "lang_option"])
