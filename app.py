@@ -133,13 +133,14 @@ def generate_product_backlog(txt):
     return res
 
 @st.cache_resource
-def generate_api(txt):
+def generate_api(txt, backlog):
     # Prompt Template
     api_gen_prompt_template = """Based on the requirements below generate a RESTful API definition that follows domain drive API best practices. Use descriptive names and consistent conventions. Include HTTP methods, endpoint paths, request and response examples in JSON format. Document all endpoints thoroughly explaining the functionality, required parameters, sample requests/responses and error conditions. Implement proper authentication, input validation, error handling, rate limiting, and idempotent endpoints. Provide sensible defaults and optional parameters where applicable. Make the API intuitive and easy to use. Focus on simplicity without unnecessary complexity in the design. Use proper versioning and pagination. Follow REST principles and HTTP standards.
     {text}
+    {backlog}
     """
     
-    PROMPTapi = PromptTemplate(template=api_gen_prompt_template, input_variables=["text"])
+    PROMPTapi = PromptTemplate(template=api_gen_prompt_template, input_variables=["text", "backlog"])
 
     res = None
     # Instantiate the LLM model
@@ -150,7 +151,7 @@ def generate_api(txt):
         # Text summarization
         try:
             chain = LLMChain(prompt=PROMPTapi, llm=llmapi)
-            res = chain.run({'text':txt})
+            res = chain.run({'text':txt, 'backlog': backlog})
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
             st.error(e)
