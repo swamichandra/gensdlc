@@ -102,6 +102,13 @@ def generate_product_backlog(txt):
     prod_backlog_gen_prompt_template = """You are a master product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and a list of asscoiated features. Assign a level of priority (High, Medium, Low) for each of the features. Include non-functional epics and features as well. List the backlog as a table with the following: Epic Name, Features, and Priority.
     {text}
     """
+    
+    prod_backlog_gen_prompt_template = """Based on the requirements below generate a prioritized product backlog for as a table with the following columns: Epic, Feature, Description, Priority
+
+    Come up with 5-7 logical epics that group related features. Under each epic, list out 3-5 concrete features that are valuable to users. Write clear and concise descriptions for each epic and feature. Assign priority numbers from 1 to 10, with 1 being the highest priority feature. Ensure the features align to the product vision and strategy. Include a mix of must-have and nice-to-have capabilities. Structure the epics and features to maximize business value, mitigate risk, and allow for incremental delivery. Order the rows by priority with the most important items on top.
+    {text}
+    """    
+    
     PROMPT3 = PromptTemplate(template=prod_backlog_gen_prompt_template, input_variables=["text"])
 
     res = None
