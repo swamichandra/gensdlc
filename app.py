@@ -84,7 +84,7 @@ def generate_code(txt, lang_option):
         # Text summarization
         try:
             chain = LLMChain(prompt=PROMPT, llm=llm)
-            res = chain.run(txt, lang_option)
+            res = chain.run({'text':txt, 'lang_option': lang_option})
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
             st.error(e)
