@@ -286,36 +286,37 @@ if submit_button:
             if BACKLOG_GEN:
                 response_api = generate_api(text_input.strip(), response_prod_backlog)
                 result_api.append(response_api)
+                st.session_state["two"] = True
 
             # Display api
             if len(result_api):
                 st.subheader("API's")
                 st.write(response_api)
                 API_GEN = True
-                st.session_state["two"] = True
                 
         with tab3:
             response_code = generate_code(text_input.strip(), lang_option)
             result_code.append(response_code)
+            st.session_state["three"] = True
 
             # Display code
             if len(result_code):
                 st.subheader("The Code")
                 st.write(response_code)
                 CODE_GEN = True
-                st.session_state["three"] = True
             
         with tab4:
             if BACKLOG_GEN:
                 response_test_case = generate_test_cases(text_input.strip(), response_prod_backlog)
                 result_test_case.append(response_test_case)
+                st.session_state["four"] = True
             
             # Display test case
             if len(result_test_case):
                 st.subheader("Test Cases")
                 st.write(response_test_case)
                 TESTCASE_GEN = True
-                st.session_state["four"] = True
+                
         
         with tab5:
             st.subheader("Deployment Script")
@@ -325,10 +326,10 @@ if submit_button:
             if CODE_GEN and BACKLOG_GEN:
                 response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
                 result_doc.append(response_doc)
+                st.session_state["six"] = True
             
             # Display documentation
             if len(result_doc):
                 st.subheader("Documentation")
                 st.write(response_doc)
                 DOC_GEN = True
-                st.session_state["six"] = True
