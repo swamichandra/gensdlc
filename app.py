@@ -97,19 +97,19 @@ def generate_product_backlog(txt):
     prod_backlog_gen_prompt_template = """You are a master software product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and features. List the backlog ONLY as bullet points.
     {text}
     """
-    PROMPT2 = PromptTemplate(template=prod_backlog_gen_prompt_template, input_variables=["text"])
+    PROMPT3 = PromptTemplate(template=prod_backlog_gen_prompt_template, input_variables=["text"])
 
     res = None
 
     # Instantiate the LLM model
     try:
-        llm2 = VertexAI(model_name=primary_model_name, max_output_tokens=506,
+        llm3 = VertexAI(model_name=primary_model_name, max_output_tokens=506,
                        temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
 
         # Text summarization
         try:
-            chain = LLMChain(prompt=PROMPT2, llm=llm2)
-            res = chain.run({'text':txt, 'code':code})
+            chain = LLMChain(prompt=PROMPT3, llm=llm3)
+            res = chain.run({'text':txt})
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
             st.error(e)
