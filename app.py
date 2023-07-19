@@ -195,7 +195,7 @@ submit_button = st.button('Submit')
 
 
 if submit_button:
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Product Backlog", "Generated Code", "Test Cases", "Deployment Script", "Documentation"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Product Backlog", "Generated Code", "API's", "Test Cases", "Deployment Script", "Documentation"])
     
     #st.write(lang_option)
     result_code = []
@@ -226,8 +226,10 @@ if submit_button:
                 st.write(response_code)
             
         with tab3:
-            #st.write("place holder for test cases")
-            #st.write(response_code)
+            st.subheader("API's")
+            st.write("Coming soon...")
+            
+        with tab4:
             response_test_case = generate_test_cases(text_input.strip(), response_code.strip())
             result_test_case.append(response_test_case)
             
@@ -236,15 +238,15 @@ if submit_button:
                 st.subheader("Test Cases")
                 st.write(response_test_case)
         
-        with tab4:
+        with tab5:
             st.subheader("Deployment Script")
             st.write("DevSecOps Coming soon...")
         
-        with tab5:
+        with tab6:
             response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
             result_doc.append(response_doc)
             
-            # Display test case
+            # Display documentation
             if len(result_doc):
                 st.subheader("Documentation")
                 st.write(response_doc)
