@@ -208,7 +208,7 @@ if creds_file is not None:
             with col3:
                 #st.write("place holder for test cases")
                 #st.write(response_code)
-                response_test_case = generate_test_cases(text_input.strip(), response_code)
+                response_test_case = generate_test_cases(text_input.strip(), response_code.strip())
                 result_test_case.append(response_test_case)
                 
                 # Display test case
