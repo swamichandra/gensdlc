@@ -191,9 +191,6 @@ def generate_documentation(txt, backlog, code):
 
     return res
 
-# Create a file upload widget for the credentials JSON file
-creds_file = st.file_uploader(
-    "Upload Google Cloud credentials file", type="json")
 
 result_code = []
 # Using the "with" syntax
