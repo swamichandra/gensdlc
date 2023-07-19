@@ -20,7 +20,7 @@ from vertexai.preview.language_models import TextGenerationModel
 # Page title
 st.set_page_config(page_title="SDLC powered by Generative A.I", page_icon=":random:", layout="wide")
 st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
-st.title('📚 SDLC powered by Generative A.I')
+st.title('👩‍💻 SDLC powered by Generative A.I')
 
 # Global Settings and Config
 project_id = "learning-351419"
