@@ -135,7 +135,7 @@ def generate_product_backlog(txt):
 @st.cache_resource
 def generate_api(txt, backlog):
     # Prompt Template
-    api_gen_prompt_template = """Based on the requirements below generate a RESTful API definition that follows domain drive API best practices. Use descriptive names and consistent conventions. Include HTTP methods, endpoint paths, request and response examples in JSON format. Document all endpoints thoroughly explaining the functionality, required parameters, sample requests/responses and error conditions. Implement proper authentication, input validation, error handling, rate limiting, and idempotent endpoints. Provide sensible defaults and optional parameters where applicable. Make the API intuitive and easy to use. Focus on simplicity without unnecessary complexity in the design. Use proper versioning and pagination. Follow REST principles and HTTP standards.
+    api_gen_prompt_template = """Based on the requirements below generate a lit of RESTful API's. Create definitions that follows domain drive API best practices. Use descriptive names and consistent conventions. Include HTTP methods, endpoint paths, request and response examples in JSON format. Document all endpoints thoroughly explaining the functionality, required parameters, sample requests/responses and error conditions. Implement proper authentication, input validation, error handling, rate limiting, and idempotent endpoints. Provide sensible defaults and optional parameters where applicable. Make the API intuitive and easy to use. Focus on simplicity without unnecessary complexity in the design. Use proper versioning and pagination. Follow REST principles and HTTP standards.
     {text}
     {backlog}
     """
