@@ -55,21 +55,24 @@ def generate_random_input():
         "You are given a license key represented as a string s that consists of only alphanumeric characters and dashes. The string is separated into n + 1 groups by n dashes. You are also given an integer k. We want to reformat the string s such that each group contains exactly k characters, except for the first group, which could be shorter than k but still must contain at least one character. Furthermore, there must be a dash inserted between two groups, and you should convert all lowercase letters to uppercase. Return the reformatted license key.",
         "By using list comprehension, please write a program to print the list after removing the 0th,4th,5th numbers in [12,24,35,70,88,120,155].",
         "Define a function which can print a dictionary where the keys are numbers between 1 and 20 (both included) and the values are square of keys.",
+        "The ETR (electronic tool rental) will be a E-commerce online rental platform that	provides rental services of various home improvement tools like carpet cleaner rentals, woodchipper rentals, lawn rollers, saws for the wide range of vendors (plumbing technicians, Pipe fitters, Steam fitters, Gas service technician, Business owners and general consumers). Should provide rental services of tools with wide range of rental plans by eliminating the huge capital investment and maintenance efforts. Provides rental services of home improvement tools across the country which benefits the technicians/small scale business owners by eradicating the need of transporting the tools to different locations where they do repairs/services.",
+        "The purpose of the online flight management system is to ease flight management and to create a convenient and easy-to-use application for passengers, trying to buy airline tickets. The system is based on a relational database with its flight management and reservation functions. We will have a database server supporting hundreds of major cities around the world as well as thousands of flights by various airline companies. Above all, we hope to provide a comfortable user experience along with the best pricing available.",
+        
     
     ]
     INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
     return INPUT_TEXT_TMP
 
 @st.cache_resource
-def generate_code(txt):
+def generate_code(txt, code_lang):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
     vertexai.init(project=PROJECT_ID, location="us-central1")
 
     # Prompt Template
-    code_gen_prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid Python programming practices. Add relevant code comments. Don't explain the code, just generate the code.
+    code_gen_prompt_template = """You are a master software engineer. Based on the requirements provided below, write the code following solid {lang_option} programming practices. Add relevant code comments. Don't explain the code, just generate the code.
     {text}
     """
-    PROMPT = PromptTemplate(template=code_gen_prompt_template, input_variables=["text"])
+    PROMPT = PromptTemplate(template=code_gen_prompt_template, input_variables=["text", "lang_option"])
 
     res = None
 
@@ -165,6 +168,11 @@ if creds_file is not None:
     # Using the "with" syntax
     #with st.form(key='sdlc_form', clear_on_submit = False):
     text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
+    
+    lang_option = st.radio(
+     "Target Programming Language:",
+     ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
+    
     submit_button = st.button('Submit')
     
     #random_button = st.button('Randomize')
@@ -190,7 +198,7 @@ if creds_file is not None:
                     st.write(response3)
             
             with col2:
-                response = generate_code(text_input.strip())
+                response = generate_code(text_input.strip(), lang_option)
                 result.append(response)
 
                 # Display code
