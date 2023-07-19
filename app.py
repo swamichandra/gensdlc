@@ -255,11 +255,11 @@ if creds_file is not None:
                 st.subheader("Deployment Script")
                 st.write("DevSecOps Coming soon...")
             
-            with col5:
-                response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
-                result_doc.append(response_doc)
+            
+            response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
+            result_doc.append(response_doc)
                 
-                # Display test case
-                if len(result_doc):
-                    st.subheader("Documentation")
-                    st.write(response_doc)
+            # Display test case
+            if len(result_doc):
+                st.subheader("Documentation")
+                st.write(response_doc)
