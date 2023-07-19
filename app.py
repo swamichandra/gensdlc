@@ -15,7 +15,6 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.llms import VertexAI
 from langchain import PromptTemplate, LLMChain
 from google.cloud import aiplatform
-from google.oauth2 import service_account
 from vertexai.preview.language_models import TextGenerationModel
 
 # Page title
@@ -27,19 +26,13 @@ st.title('👩‍💻 SDLC powered by Generative A.I')
 project_id = "learning-351419"
 loc = "us-central1"
 primary_model_name = "text-bison@001"
-temperature = 0.1
+temperature = 0.2
 max_output_tokens = 1024
 top_p = 0.8
 top_k = 40
 location = "us-central1"
 model_name = "text-bison@001"
-
-# Create API client.
-credentials = service_account.Credentials.from_service_account_info(
-    st.secrets["gcp_service_account"]
-)
-
-vertexai.init(project=project_id, location=loc, credentials=credentials)
+vertexai.init(project=project_id, location=loc)
 
 
 @st.cache_resource
@@ -191,70 +184,80 @@ def generate_documentation(txt, backlog, code):
 
     return res
 
+# Create a file upload widget for the credentials JSON file
+creds_file = st.file_uploader(
+    "Upload Google Cloud credentials file", type="json")
 
 result_code = []
-# Using the "with" syntax
-#with st.form(key='sdlc_form', clear_on_submit = False):
-text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
+if creds_file is not None:
+    now = datetime.now()
+    randomfilename = "temp_credentials_" + now.strftime("%m%d%Y_%H%M%S")
 
-lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
-
-submit_button = st.button('Submit')
-
-#random_button = st.button('Randomize')
-col1, col2 = st.columns([1, 1])
-col3, col4 = st.columns([1, 1])
-col5, buf = st.columns([1, 1])
-
-if submit_button:
-    #st.write(lang_option)
-    result_code = []
-    response_code = None
-    result_test_case = []
-    response_test_case = None
-    result_prod_backlog = []
-    response_prod_backlog = None
-    result_doc = []
-    response_doc = None
-    with st.spinner('Wait for the magic ...'):
-        with col1:
-            response_prod_backlog = generate_product_backlog(text_input.strip())
-            result_prod_backlog.append(response_prod_backlog)
+    creds_contents = creds_file.read().decode("utf-8")
+    with open(randomfilename, "w") as f:
+        f.write(creds_contents)
+    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = randomfilename
+    
+    # Using the "with" syntax
+    #with st.form(key='sdlc_form', clear_on_submit = False):
+    text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
+    
+    lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
+    
+    submit_button = st.button('Submit')
+    
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Product Backlog", "Generated Code", "Test Cases", "Deployment Script", "Documentation"])
+    
+    
+    if submit_button:
+        #st.write(lang_option)
+        result_code = []
+        response_code = None
+        result_test_case = []
+        response_test_case = None
+        result_prod_backlog = []
+        response_prod_backlog = None
+        result_doc = []
+        response_doc = None
+        with st.spinner('Wait for the magic ...'):
+            with tab1:
+                response_prod_backlog = generate_product_backlog(text_input.strip())
+                result_prod_backlog.append(response_prod_backlog)
+                
+                # Display backlog
+                if len(result_prod_backlog):
+                    st.subheader("Feature Backlog")
+                    st.write(response_prod_backlog)
             
-            # Display backlog
-            if len(result_prod_backlog):
-                st.subheader("Feature Backlog")
-                st.write(response_prod_backlog)
-        
-        with col2:
-            response_code = generate_code(text_input.strip(), lang_option)
-            result_code.append(response_code)
+            with tab2:
+                response_code = generate_code(text_input.strip(), lang_option)
+                result_code.append(response_code)
 
-            # Display code
-            if len(result_code):
-                st.subheader("The Code")
-                st.write(response_code)
+                # Display code
+                if len(result_code):
+                    st.subheader("The Code")
+                    st.write(response_code)
+                
+            with tab3:
+                #st.write("place holder for test cases")
+                #st.write(response_code)
+                response_test_case = generate_test_cases(text_input.strip(), response_code.strip())
+                result_test_case.append(response_test_case)
+                
+                # Display test case
+                if len(result_test_case):
+                    st.subheader("Test Cases")
+                    st.write(response_test_case)
             
-        with col3:
-            #st.write("place holder for test cases")
-            #st.write(response_code)
-            response_test_case = generate_test_cases(text_input.strip(), response_code.strip())
-            result_test_case.append(response_test_case)
+            with tab:
+                st.subheader("Deployment Script")
+                st.write("DevSecOps Coming soon...")
             
-            # Display test case
-            if len(result_test_case):
-                st.subheader("Test Cases")
-                st.write(response_test_case)
-        
-        with col4:
-            st.subheader("Deployment Script")
-            st.write("DevSecOps Coming soon...")
-        
-        
-        response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
-        result_doc.append(response_doc)
-            
-        # Display test case
-        if len(result_doc):
-            st.subheader("Documentation")
-            st.write(response_doc)
+            with tab5:
+                response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
+                result_doc.append(response_doc)
+                
+                # Display test case
+                if len(result_doc):
+                    st.subheader("Documentation")
+                    st.write(response_doc)
