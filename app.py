@@ -168,8 +168,8 @@ if creds_file is not None:
     submit_button = st.button('Submit')
     
     #random_button = st.button('Randomize')
-    col1, buff, col2 = st.columns([2, 1, 2])
-    col3, buff, col4, col5 = st.columns([2, 1, 1, 1])
+    col1, col2 = st.columns([1, 1])
+    col3, col4, col5 = st.columns([1, 1, 1])
     
     if submit_button:
         result = []
