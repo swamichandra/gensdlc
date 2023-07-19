@@ -97,7 +97,7 @@ def generate_code(txt, lang_option):
 @st.cache_resource
 def generate_product_backlog(txt):
     # Prompt Template
-    prod_backlog_gen_prompt_template = """You are a master software product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and features. List the epics as bullets and the features as sub-bullets undeneath the epics. For each of the bullet points include the folowing as nicely formatted sub-bullets: Epic Name, Features, and Priority.
+    prod_backlog_gen_prompt_template = """You are a master product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and features with associated priority. List the epics as well formatted bullet points and the features as sub-bullets undeneath the respective epics. For each of the bullet points include the folowing: Epic Name, Features, and Priority.
     {text}
     """
     PROMPT3 = PromptTemplate(template=prod_backlog_gen_prompt_template, input_variables=["text"])
