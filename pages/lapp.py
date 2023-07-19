@@ -196,77 +196,68 @@ creds_file = st.file_uploader(
     "Upload Google Cloud credentials file", type="json")
 
 result_code = []
-if creds_file is not None:
-    now = datetime.now()
-    randomfilename = "temp_credentials_" + now.strftime("%m%d%Y_%H%M%S")
+# Using the "with" syntax
+#with st.form(key='sdlc_form', clear_on_submit = False):
+text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
 
-    creds_contents = creds_file.read().decode("utf-8")
-    with open(randomfilename, "w") as f:
-        f.write(creds_contents)
-    os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = randomfilename
-    
-    # Using the "with" syntax
-    #with st.form(key='sdlc_form', clear_on_submit = False):
-    text_input = st.text_area('Tell me about your app', generate_random_input(), height=200, key='fav1')
-    
-    lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
-    
-    submit_button = st.button('Submit')
-    
-    #random_button = st.button('Randomize')
-    col1, col2 = st.columns([1, 1])
-    col3, col4 = st.columns([1, 1])
-    col5, buf = st.columns([1, 1])
-    
-    if submit_button:
-        #st.write(lang_option)
-        result_code = []
-        response_code = None
-        result_test_case = []
-        response_test_case = None
-        result_prod_backlog = []
-        response_prod_backlog = None
-        result_doc = []
-        response_doc = None
-        with st.spinner('Wait for the magic ...'):
-            with col1:
-                response_prod_backlog = generate_product_backlog(text_input.strip())
-                result_prod_backlog.append(response_prod_backlog)
-                
-                # Display backlog
-                if len(result_prod_backlog):
-                    st.subheader("Feature Backlog")
-                    st.write(response_prod_backlog)
-            
-            with col2:
-                response_code = generate_code(text_input.strip(), lang_option)
-                result_code.append(response_code)
+lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
 
-                # Display code
-                if len(result_code):
-                    st.subheader("The Code")
-                    st.write(response_code)
-                
-            with col3:
-                #st.write("place holder for test cases")
-                #st.write(response_code)
-                response_test_case = generate_test_cases(text_input.strip(), response_code.strip())
-                result_test_case.append(response_test_case)
-                
-                # Display test case
-                if len(result_test_case):
-                    st.subheader("Test Cases")
-                    st.write(response_test_case)
+submit_button = st.button('Submit')
+
+#random_button = st.button('Randomize')
+col1, col2 = st.columns([1, 1])
+col3, col4 = st.columns([1, 1])
+col5, buf = st.columns([1, 1])
+
+if submit_button:
+    #st.write(lang_option)
+    result_code = []
+    response_code = None
+    result_test_case = []
+    response_test_case = None
+    result_prod_backlog = []
+    response_prod_backlog = None
+    result_doc = []
+    response_doc = None
+    with st.spinner('Wait for the magic ...'):
+        with col1:
+            response_prod_backlog = generate_product_backlog(text_input.strip())
+            result_prod_backlog.append(response_prod_backlog)
             
-            with col4:
-                st.subheader("Deployment Script")
-                st.write("DevSecOps Coming soon...")
+            # Display backlog
+            if len(result_prod_backlog):
+                st.subheader("Feature Backlog")
+                st.write(response_prod_backlog)
+        
+        with col2:
+            response_code = generate_code(text_input.strip(), lang_option)
+            result_code.append(response_code)
+
+            # Display code
+            if len(result_code):
+                st.subheader("The Code")
+                st.write(response_code)
             
+        with col3:
+            #st.write("place holder for test cases")
+            #st.write(response_code)
+            response_test_case = generate_test_cases(text_input.strip(), response_code.strip())
+            result_test_case.append(response_test_case)
             
-            response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
-            result_doc.append(response_doc)
-                
             # Display test case
-            if len(result_doc):
-                st.subheader("Documentation")
-                st.write(response_doc)
+            if len(result_test_case):
+                st.subheader("Test Cases")
+                st.write(response_test_case)
+        
+        with col4:
+            st.subheader("Deployment Script")
+            st.write("DevSecOps Coming soon...")
+        
+        
+        response_doc = generate_documentation(text_input.strip(), response_prod_backlog.strip(), response_code.strip())
+        result_doc.append(response_doc)
+            
+        # Display test case
+        if len(result_doc):
+            st.subheader("Documentation")
+            st.write(response_doc)
