@@ -91,6 +91,33 @@ def generate_code(txt):
 
     return res
 
+@st.cache_resource
+def generate_product_backlog(txt):
+    # Prompt Template
+    prod_backlog_gen_prompt_template = """You are a master software product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and features. List the backlog ONLY as bullet points.
+    {text}
+    """
+    PROMPT2 = PromptTemplate(template=prod_backlog_gen_prompt_template, input_variables=["text"])
+
+    res = None
+
+    # Instantiate the LLM model
+    try:
+        llm2 = VertexAI(model_name=primary_model_name, max_output_tokens=506,
+                       temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
+
+        # Text summarization
+        try:
+            chain = LLMChain(prompt=PROMPT2, llm=llm2)
+            res = chain.run({'text':txt, 'code':code})
+        except Exception as e:
+            st.error("Error during LLM model chaining and invocation")
+            st.error(e)
+    except Exception as e:
+        st.error("Error during LLM model initialization")
+        st.error(e)
+
+    return res
 
 @st.cache_resource
 def generate_test_cases(txt, code):
@@ -147,12 +174,17 @@ if creds_file is not None:
     if submit_button:
         result = []
         response = None
-        result2 = []
-        response2 = None
+        result3 = []
+        response3 = None
         with st.spinner('Wait for the magic ...'):
             with col1:
-                st.subheader("Feature Backlog")
-                st.write("Coming soon...")
+                response3 = generate_product_backlog(text_input.strip())
+                result3.append(response3)
+                
+                # Display test case
+                if len(result3):
+                    st.subheader("Feature Backlog")
+                    st.write(response3)
             
             with col2:
                 response = generate_code(text_input.strip())
