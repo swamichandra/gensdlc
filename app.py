@@ -52,8 +52,8 @@ def generate_random_input():
         "An app to manage everyday tasks and items. This could include features such as adding tasks, deleting tasks, marking tasks as completed, and setting due dates for tasks.",
         "An app that can display the current weather conditions and forecast for a specific location. This could include features such as showing the temperature, humidity, wind speed, and precipitation.",
         "You are given an array of k linked-lists lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
-        "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB", 
-        "The database has students and course tables. Write a PostgreSQL query to fetch a list of students who are enrolled in at least 3 courses.", 
+        "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB",
+        "Railway tracking app: For citizens living in cities bustling with activity, public transportation is an integral part of their daily lives. Unfortunately, with trains often running late or leaving us unsure if they will even show up at all, an unforeseen disruption to our schedule can be the difference between being on time… or not. Wouldn’t it be nice to have a reliable resource that could provide you with the exact info about when your train will arrive? With a railway tracking app, commuters would have access to useful information about where their train’s location is in real-time – potentially saving us from awkward misunderstandings or added stress as we try to coordinate other transport methods when a train is delayed. And who knows? If utilized correctly, a railway tracking app could even make life on the rails more enjoyable for everyday commuters.",
         "The ETR (electronic tool rental) will be a E-commerce online rental platform that	provides rental services of various home improvement tools like carpet cleaner rentals, woodchipper rentals, lawn rollers, saws for the wide range of vendors (plumbing technicians, Pipe fitters, Steam fitters, Gas service technician, Business owners and general consumers). Should provide rental services of tools with wide range of rental plans by eliminating the huge capital investment and maintenance efforts. Provides rental services of home improvement tools across the country which benefits the technicians/small scale business owners by eradicating the need of transporting the tools to different locations where they do repairs/services.",
         "The purpose of the online flight management system is to ease flight management and to create a convenient and easy-to-use application for passengers, trying to buy airline tickets. The system is based on a relational database with its flight management and reservation functions. We will have a database server supporting hundreds of major cities around the world as well as thousands of flights by various airline companies. Above all, we hope to provide a comfortable user experience along with the best pricing available.",
         "Simple Library Management System using which a librarian can add book details like ISBN number, book title, author name, edition, and publication details through a web page. In addition to this, the librarian or any user can search for the available books in the library by the book name. If book details are present in the database, the search details are displayed.",
@@ -162,29 +162,29 @@ def generate_api(txt):
 
 
 @st.cache_resource
-def generate_test_cases(txt, code):
+def generate_test_cases(txt, backlog):
     # Prompt Template    
-    test_case_gen_prompt_template = """Based on the requirements and code provided below generate as a table a test plan and associated test cases. I want in the table the following: Test Case ID, Description, Input Data, Expected Result, Status
+    test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table with columns: Test Case ID, Test Type, Description, Input Data, Expected Result
 
-    Read through the provided app description and codebase below. Identify key user flows, edge cases, and failure scenarios. Create detailed test cases to validate all critical parts of the app - user interface, APIs, databases, security, payments etc. Ensure test coverage for positive, negative, boundary and exceptional scenarios. Write clear test case descriptions summarizing steps. Define appropriate input data and expected results for each case. Create test data sets that are valid, invalid, empty, extremely large etc. Group related cases into test suites for different app modules and functions. Develop a high level test plan outlining the scope, timelines, environments, team roles and responsibilities. Provide end-to-end regression test suite to verify overall app integrity. Simulate real world usage and data. Follow best practices for test planning, documentation and coverage.
-    
+    Read through the provided application description and code. Create test cases to evaluate functionality, usability, performance, security, compatibility, reliability and other quality attributes. Outline superb test data covering valid, invalid, edge case scenarios. Specify detailed test steps and expected results. Include positive, negative, destructive, exploratory, regression, user acceptance testing. Evaluate against quality standards and requirements. Recommend optimal test environments, tools and techniques. Develop a formal test plan covering scope, schedule, time estimation, environment needs, metrics, team structure and responsibilities. Apply best practices for requirement traceability and risk based testing. Focus on maximizing test coverage and defect detection. Document all test cases clearly in an easy to read tabular format with proper alignment, spacing and headings. Produce a high quality, reusable test suite following industry standards and guidelines.
+        
     {text}
-    {code}
+    {backlog}
     """
     
-    PROMPTtestcase = PromptTemplate(template=test_case_gen_prompt_template, input_variables=["text", "code"])
+    PROMPTtestcase = PromptTemplate(template=test_case_gen_prompt_template, input_variables=["text", "backlog"])
 
     res = None
 
     # Instantiate the LLM model
     try:
-        llm2 = VertexAI(model_name=primary_model_name, max_output_tokens=506,
+        llmtestcase = VertexAI(model_name=primary_model_name, max_output_tokens=506,
                        temperature=0.1, top_p=0.8, top_k=40, verbose=True,)
 
         # Text summarization
         try:
-            chain = LLMChain(prompt=PROMPTtestcase, llm=llm2)
-            res = chain.run({'text':txt, 'code':code})
+            chain = LLMChain(prompt=PROMPTtestcase, llm=llmtestcase)
+            res = chain.run({'text':txt, 'backlog':backlog})
         except Exception as e:
             st.error("Error during LLM model chaining and invocation")
             st.error(e)
@@ -278,7 +278,7 @@ if submit_button:
                 st.write(response_api)
             
         with tab4:
-            response_test_case = generate_test_cases(text_input.strip(), response_code.strip())
+            response_test_case = generate_test_cases(text_input.strip(), response_prod_backlog)
             result_test_case.append(response_test_case)
             
             # Display test case
