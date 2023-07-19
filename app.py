@@ -236,7 +236,7 @@ if submit_button:
                 st.subheader("Test Cases")
                 st.write(response_test_case)
         
-        with tab:
+        with tab4:
             st.subheader("Deployment Script")
             st.write("DevSecOps Coming soon...")
         
