@@ -243,13 +243,22 @@ submit_button = st.button('Submit')
 
 if submit_button:
     # states
+    step1 = "Product Backlog"
+    step2 = "API's 🔒" if "two" not in st.session_state else "API's"
+    step3 = "Generated Code 🔒" if "three" not in st.session_state else "Generated Code"
+    step4 = "Test Cases 🔒" if "four" not in st.session_state else "Test Cases"
+    step5 = "Deployment Script"
+    step6 = "Documentation 🔒" if "six" not in st.session_state else "Documentation"
+    steps = [step1, step2, step3, step4, step5, step6]
+
     BACKLOG_GEN = False
     API_GEN = False
     CODE_GEN = False
     TESTCASE_GEN = False
     DOC_GEN = False
     
-    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Product Backlog", "API's", "Generated Code", "Test Cases", "Deployment Script", "Documentation"])
+    #tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Product Backlog", "API's", "Generated Code", "Test Cases", "Deployment Script", "Documentation"])
+    tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(steps)
     
     #st.write(lang_option)
     result_code = []
@@ -273,16 +282,6 @@ if submit_button:
                 st.write(response_prod_backlog)
                 BACKLOG_GEN = True
         
-        with tab3:
-            response_code = generate_code(text_input.strip(), lang_option)
-            result_code.append(response_code)
-
-            # Display code
-            if len(result_code):
-                st.subheader("The Code")
-                st.write(response_code)
-                CODE_GEN = True
-            
         with tab2:
             if BACKLOG_GEN:
                 response_api = generate_api(text_input.strip(), response_prod_backlog)
@@ -293,6 +292,18 @@ if submit_button:
                 st.subheader("API's")
                 st.write(response_api)
                 API_GEN = True
+                st.session_state["two"] = True
+                
+        with tab3:
+            response_code = generate_code(text_input.strip(), lang_option)
+            result_code.append(response_code)
+
+            # Display code
+            if len(result_code):
+                st.subheader("The Code")
+                st.write(response_code)
+                CODE_GEN = True
+                st.session_state["three"] = True
             
         with tab4:
             if BACKLOG_GEN:
@@ -304,6 +315,7 @@ if submit_button:
                 st.subheader("Test Cases")
                 st.write(response_test_case)
                 TESTCASE_GEN = True
+                st.session_state["four"] = True
         
         with tab5:
             st.subheader("Deployment Script")
@@ -319,3 +331,4 @@ if submit_button:
                 st.subheader("Documentation")
                 st.write(response_doc)
                 DOC_GEN = True
+                st.session_state["six"] = True
