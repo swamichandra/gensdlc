@@ -181,7 +181,7 @@ if creds_file is not None:
                 response3 = generate_product_backlog(text_input.strip())
                 result3.append(response3)
                 
-                # Display test case
+                # Display backlog
                 if len(result3):
                     st.subheader("Feature Backlog")
                     st.write(response3)
