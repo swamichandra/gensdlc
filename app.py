@@ -163,13 +163,8 @@ def generate_api(txt):
 
 @st.cache_resource
 def generate_test_cases(txt, code):
-    # Prompt Template
-    test_case_gen_prompt_template = """You are a master software quality engineer. Based on the requirements and code provided below, generate test cases to validate features and functions. List the test cases ONLY as a table with the following Test Case ID, Test Scenario, Test Steps and Expected Results.
-    {text}
-    {code}
-    """
-    
-    test_case_gen_prompt_template = """Based on the requirements and code provided below generate a comprehensive test plan and associated test cases. I want the results as a table with the following columns: Test Case ID, Description, Input Data, Expected Result, Status
+    # Prompt Template    
+    test_case_gen_prompt_template = """Based on the requirements and code provided below generate as a table a test plan and associated test cases. I want in the table the following: Test Case ID, Description, Input Data, Expected Result, Status
 
     Read through the provided app description and codebase below. Identify key user flows, edge cases, and failure scenarios. Create detailed test cases to validate all critical parts of the app - user interface, APIs, databases, security, payments etc. Ensure test coverage for positive, negative, boundary and exceptional scenarios. Write clear test case descriptions summarizing steps. Define appropriate input data and expected results for each case. Create test data sets that are valid, invalid, empty, extremely large etc. Group related cases into test suites for different app modules and functions. Develop a high level test plan outlining the scope, timelines, environments, team roles and responsibilities. Provide end-to-end regression test suite to verify overall app integrity. Simulate real world usage and data. Follow best practices for test planning, documentation and coverage.
     
