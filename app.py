@@ -181,6 +181,7 @@ if creds_file is not None:
     col5, buf = st.columns([1, 1])
     
     if submit_button:
+        st.write(lang_option)
         result = []
         response = None
         result2 = []
