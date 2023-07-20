@@ -278,9 +278,12 @@ if submit_button:
     response_doc = None
     result_api = []
     response_api = None
+    
+    factoid_list = ["The world’s oldest wooden wheel has been around for more than 5,000 years", "Sudan has more pyramids than any country in the world", "The bumblebee bat is the world’s smallest mammal", "The circulatory system is more than 60,000 miles long"]
+    
     with st.spinner("Wait for the magic ... "):
         
-        progress_text = "I'm generating a set of things to bootstrap your app build. Please wait."
+        progress_text = "I'm generating a set of things to bootstrap your app build. Did you know: " + random.choice(factoid_list)
         my_bar = st.progress(0, text=progress_text)
 
         for percent_complete in range(100):
