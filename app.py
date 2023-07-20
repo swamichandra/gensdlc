@@ -238,7 +238,8 @@ result_code = []
 
 #button_random = st.button("Randomize App Description")
 #if button_random:
-app_val = generate_random_input()
+tmp_val = generate_random_input()
+app_val = tmp_val
 
 text_input = st.text_area('Describe in a few sentences the app you want to build', value=app_val, height=200, key='fav1')
     
@@ -283,7 +284,7 @@ if submit_button:
         my_bar = st.progress(0, text=progress_text)
 
         for percent_complete in range(100):
-            time.sleep(.22)
+            time.sleep(.27)
             my_bar.progress(percent_complete + 1, text=progress_text)
         my_bar.empty()
         
