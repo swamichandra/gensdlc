@@ -28,10 +28,10 @@ st.title('💫 SDLC augmented by Gen A.I')
 st.markdown("""
         <style>
                .block-container {
-                    padding-top: 1.2rem;
+                    padding-top: 1.5rem;
                     padding-bottom: 0rem;
-                    padding-left: 1.2rem;
-                    padding-right: 1.2rem;
+                    padding-left: 1.5rem;
+                    padding-right: 1.5rem;
                 }
         </style>
         """, unsafe_allow_html=True)
@@ -291,7 +291,7 @@ if submit_button:
     result_api = []
     response_api = None
     
-    factoid_list = ["The average person's left hand does 56% of the typing.", "Sudan has more pyramids than any country in the world", "In Alaska, it is legal to shoot bears. However, waking a sleeping bear for the purpose of taking a photograph is prohibited.", "A 'jiffy' is an actual unit of time for 1/100th of a second.", "Floccinaucinihilipilification, the declaration of an item being useless, is the longest non-medical term in the English language.", "Before Google launched Gmail, “G-Mail” was the name of a free e-mail service offered by Garfield’s website.", "Les Misérables has a three-page, 823-word sentence that is divided by ninety-three commas, fifty-one semicolons, and four dashes. Why? According to rumors someone suffocated from lack of oxygen in the 1940's just short of the seventy-third comma while giving a dramatic reading from the work."]
+    factoid_list = ["The average person's left hand does 56% of the typing.", "Sudan has more pyramids than any country in the world", "In Alaska, it is legal to shoot bears. However, waking a sleeping bear for the purpose of taking a photograph is prohibited.", "A 'jiffy' is an actual unit of time for 1/100th of a second.", "Floccinaucinihilipilification, the declaration of an item being useless, is the longest non-medical term in the English language.", "Before Google launched Gmail, “G-Mail” was the name of a free e-mail service offered by Garfield’s website.", "Les Misérables has a three-page, 823-word sentence that is divided by ninety-three commas, fifty-one semicolons, and four dashes. Why? According to rumors someone suffocated from lack of oxygen in the 1940's just short of the seventy-third comma while giving a dramatic reading from the work.", "The Main Library at Indiana University sinks over an inch every year because engineers failed to account for the weight of all the books that it would eventually hold.", "Ping Pong balls can travel off the paddle at speeds up to 160 km/hr. That's just under 100 mph.", "No word in the English language rhymes with 'MONTH.'", "Spiral staircases in medieval castles run clockwise. This is because all knights used to be right-handed. When the intruding army would climb the stairs, they would not be able to use their right hand, which was holding the sword, because of the difficulties of climbing the stairs. Left-handed knights would have had no trouble, except left-handed people could never become knights because they were assumed to be descendants of the devil.", "Hydrogen gas is the least dense substance in the world, at 0.08988g/cc."]
     
     with st.spinner("Wait for the magic ... "):
         
