@@ -232,8 +232,8 @@ result_code = []
 #if button_random:
 app_val = "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals."
 
-random_index = random.randint(1, len(sample_code_gen_qns))
-app_val = sample_code_gen_qns[random_index]
+#random_index = random.randint(1, len(sample_code_gen_qns))
+#app_val = sample_code_gen_qns[random_index]
 
 text_input = st.text_area('Describe in a few sentences the app you want to build', value=app_val, height=200, key='fav1')
     
@@ -277,7 +277,7 @@ if submit_button:
     
     with st.spinner("Wait for the magic ... "):
         
-        progress_text = "I'm generating a set of things to bootstrap your app build." + '\n' + "💡 Did you know: " + random.choice(factoid_list)
+        progress_text = "I'm generating a set of things to bootstrap your app build." + '\n\n' + "💡 Did you know: " + random.choice(factoid_list)
         my_bar = st.progress(0, text=progress_text)
 
         for percent_complete in range(100):
