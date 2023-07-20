@@ -5,6 +5,7 @@
 # Feel free to expand, extent and enhance.
 import css
 import os
+import time
 import random
 from datetime import datetime
 import vertexai
@@ -247,11 +248,11 @@ submit_button = st.button('Submit')
 if submit_button:
     # states
     step1 = "Product Backlog"
-    step2 = "API's 🔒" if "two" not in st.session_state else "API's"
-    step3 = "Generated Code 🔒" if "three" not in st.session_state else "Generated Code"
-    step4 = "Test Cases 🔒" if "four" not in st.session_state else "Test Cases"
+    step2 = "API's" if "two" not in st.session_state else "API's"
+    step3 = "Generated Code" if "three" not in st.session_state else "Generated Code"
+    step4 = "Test Cases" if "four" not in st.session_state else "Test Cases"
     step5 = "Deployment Script"
-    step6 = "Documentation 🔒" if "six" not in st.session_state else "Documentation"
+    step6 = "Documentation" if "six" not in st.session_state else "Documentation"
     steps = [step1, step2, step3, step4, step5, step6]
 
     BACKLOG_GEN = False
@@ -275,6 +276,7 @@ if submit_button:
     result_api = []
     response_api = None
     with st.spinner('Wait for the magic ...'):
+        time.sleep(5)
         with tab1:
             response_prod_backlog = generate_product_backlog(text_input.strip())
             result_prod_backlog.append(response_prod_backlog)
