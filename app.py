@@ -239,7 +239,7 @@ result_code = []
 #button_random = st.button("Randomize App Description")
 #if button_random:
 tmp_val = generate_random_input()
-app_val = "" + tmp_val
+app_val = "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals."
 
 text_input = st.text_area('Describe in a few sentences the app you want to build', value=app_val, height=200, key='fav1')
     
