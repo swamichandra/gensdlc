@@ -239,7 +239,7 @@ result_code = []
 #button_random = st.button("Randomize App Description")
 #if button_random:
 tmp_val = generate_random_input()
-app_val = tmp_val
+app_val = "" + tmp_val
 
 text_input = st.text_area('Describe in a few sentences the app you want to build', value=app_val, height=200, key='fav1')
     
