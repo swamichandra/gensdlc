@@ -24,6 +24,18 @@ st.set_page_config(page_title="SDLC powered by GCP Vertex Generative A.I", page_
 st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
 st.title('💫 SDLC augmented by Gen A.I')
 
+# Remove whitespace from the top of the page and sidebar
+st.markdown("""
+        <style>
+               .block-container {
+                    padding-top: 1rem;
+                    padding-bottom: 0rem;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+        </style>
+        """, unsafe_allow_html=True)
+
 # Global Settings and Config
 project_id = "learning-351419"
 loc = "us-central1"
