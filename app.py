@@ -279,7 +279,7 @@ if submit_button:
     result_api = []
     response_api = None
     
-    factoid_list = ["The average person's left hand does 56% of the typing.", "Sudan has more pyramids than any country in the world", "In Alaska, it is legal to shoot bears. However, waking a sleeping bear for the purpose of taking a photograph is prohibited.", "A 'jiffy' is an actual unit of time for 1/100th of a second."]
+    factoid_list = ["The average person's left hand does 56% of the typing.", "Sudan has more pyramids than any country in the world", "In Alaska, it is legal to shoot bears. However, waking a sleeping bear for the purpose of taking a photograph is prohibited.", "A 'jiffy' is an actual unit of time for 1/100th of a second.", "Floccinaucinihilipilification, the declaration of an item being useless, is the longest non-medical term in the English language.", "Before Google launched Gmail, “G-Mail” was the name of a free e-mail service offered by Garfield’s website.", "Les Misérables has a three-page, 823-word sentence that is divided by ninety-three commas, fifty-one semicolons, and four dashes. Why? According to rumors someone suffocated from lack of oxygen in the 1940's just short of the seventy-third comma while giving a dramatic reading from the work."]
     
     with st.spinner("Wait for the magic ... "):
         
@@ -287,7 +287,7 @@ if submit_button:
         my_bar = st.progress(0, text=progress_text)
 
         for percent_complete in range(100):
-            time.sleep(.53)
+            time.sleep(.48)
             my_bar.progress(percent_complete + 1, text=progress_text)
         my_bar.empty()
         
