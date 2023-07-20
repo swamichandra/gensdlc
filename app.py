@@ -254,10 +254,14 @@ app_val = "Fitness App: A healthy lifestyle web application targeting health con
 #app_val = sample_code_gen_qns[random_index]
 
 text_input = st.text_area('Describe in a few sentences the app you want to develop. I will then use AI generative capabilities to create some key artifacts that can help jumpstart your app development process.', value=app_val, height=200, key='fav1')
-    
-lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
 
-submit_button = st.button('Submit')
+col1, col2 = st.columns(2)
+with col1:
+    lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
+with col2:
+    cloud_provider = st.radio("Target Cloud Platform:", ('AWS', 'Azure', 'GCP', 'Hybrid'), horizontal=True, disabled=True)
+    
+submit_button = st.button('Generate')
 
 
 if submit_button:
