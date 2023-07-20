@@ -22,7 +22,7 @@ from vertexai.preview.language_models import TextGenerationModel
 # Page title
 st.set_page_config(page_title="SDLC powered by GCP Vertex Generative A.I", page_icon=":random:", layout="wide")
 st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
-st.title('👩‍💻 SDLC powered by Generative A.I')
+st.title('💫 SDLC augmented by Gen A.I')
 
 # Global Settings and Config
 project_id = "learning-351419"
@@ -42,31 +42,23 @@ credentials = service_account.Credentials.from_service_account_info(
 
 vertexai.init(project=project_id, location=loc, credentials=credentials)
 
-
-#@st.cache_resource
-def generate_random_input():
-    INPUT_TEXT_TMP = ""
-    sample_code_gen_qns = [
-        "Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", 
-        "Write a that accepts a full name as input and returns avatar letters.",
-        "Social food delivery app: Satisfy your cravings while supporting local businesses with a social food delivery app. Discover a wide range of culinary delights from nearby restaurants and food vendors. Engage with a community of food enthusiasts, share recommendations, and enjoy exclusive deals. Experience the joy of delicious food delivered right to your doorstep, all while fostering connections within your local food scene.",
-        "An app to manage everyday tasks and items. This could include features such as adding tasks, deleting tasks, marking tasks as completed, and setting due dates for tasks.",
-        "An app that can display the current weather conditions and forecast for a specific location. This could include features such as showing the temperature, humidity, wind speed, and precipitation.",
-        "You are given an array of k linked-lists lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
-        "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB",
-        "Railway tracking app: For citizens living in cities bustling with activity, public transportation is an integral part of their daily lives. Unfortunately, with trains often running late or leaving us unsure if they will even show up at all, an unforeseen disruption to our schedule can be the difference between being on time… or not. Wouldn’t it be nice to have a reliable resource that could provide you with the exact info about when your train will arrive? With a railway tracking app, commuters would have access to useful information about where their train’s location is in real-time – potentially saving us from awkward misunderstandings or added stress as we try to coordinate other transport methods when a train is delayed. And who knows? If utilized correctly, a railway tracking app could even make life on the rails more enjoyable for everyday commuters.",
-        "The ETR (electronic tool rental) will be a E-commerce online rental platform that	provides rental services of various home improvement tools like carpet cleaner rentals, woodchipper rentals, lawn rollers, saws for the wide range of vendors (plumbing technicians, Pipe fitters, Steam fitters, Gas service technician, Business owners and general consumers). Should provide rental services of tools with wide range of rental plans by eliminating the huge capital investment and maintenance efforts. Provides rental services of home improvement tools across the country which benefits the technicians/small scale business owners by eradicating the need of transporting the tools to different locations where they do repairs/services.",
-        "The purpose of the online flight management system is to ease flight management and to create a convenient and easy-to-use application for passengers, trying to buy airline tickets. The system is based on a relational database with its flight management and reservation functions. We will have a database server supporting hundreds of major cities around the world as well as thousands of flights by various airline companies. Above all, we hope to provide a comfortable user experience along with the best pricing available.",
-        "Simple Library Management System using which a librarian can add book details like ISBN number, book title, author name, edition, and publication details through a web page. In addition to this, the librarian or any user can search for the available books in the library by the book name. If book details are present in the database, the search details are displayed.",
-        "Container tracking app: Streamline your logistics operations with a container tracking application. Track the movement of your shipments in real time, ensuring transparency and efficiency throughout the supply chain. Get instant updates on container status, location, and estimated arrival times. Simplify the management of your cargo and enhance collaboration with shipping partners, empowering you to stay ahead in the global marketplace.",
-        "Bike servicing app: A door-step bike servicing platform and application which will use technology for the convenience of two-wheeler owners by providing them a transparent connection with high-quality vehicle maintenance providers. The platform can provide assisted door-step pick-up and drop, an in-built inventory management system that enables reduction of waiting-time, smarter stock allocation, an order management system etc.",
-        "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals.",
-        
-    
+sample_code_gen_qns = [
+    "Generate a semantic HTML and Tailwind CSS Contact Support form consisting of the user name, email, issue type, and message. The form elements should be stacked vertically and placed inside a card", 
+    "Write a that accepts a full name as input and returns avatar letters.",
+    "Social food delivery app: Satisfy your cravings while supporting local businesses with a social food delivery app. Discover a wide range of culinary delights from nearby restaurants and food vendors. Engage with a community of food enthusiasts, share recommendations, and enjoy exclusive deals. Experience the joy of delicious food delivered right to your doorstep, all while fostering connections within your local food scene.",
+    "An app to manage everyday tasks and items. This could include features such as adding tasks, deleting tasks, marking tasks as completed, and setting due dates for tasks.",
+    "An app that can display the current weather conditions and forecast for a specific location. This could include features such as showing the temperature, humidity, wind speed, and precipitation.",
+    "You are given an array of k linked-lists lists, each linked-list is sorted in ascending order. Merge all the linked-lists into one sorted linked-list and return it.",
+    "Write an Express.js API to fetch the current user's profile information. It should make use of MongoDB",
+    "Railway tracking app: For citizens living in cities bustling with activity, public transportation is an integral part of their daily lives. Unfortunately, with trains often running late or leaving us unsure if they will even show up at all, an unforeseen disruption to our schedule can be the difference between being on time… or not. Wouldn’t it be nice to have a reliable resource that could provide you with the exact info about when your train will arrive? With a railway tracking app, commuters would have access to useful information about where their train’s location is in real-time – potentially saving us from awkward misunderstandings or added stress as we try to coordinate other transport methods when a train is delayed. And who knows? If utilized correctly, a railway tracking app could even make life on the rails more enjoyable for everyday commuters.",
+    "The ETR (electronic tool rental) will be a E-commerce online rental platform that	provides rental services of various home improvement tools like carpet cleaner rentals, woodchipper rentals, lawn rollers, saws for the wide range of vendors (plumbing technicians, Pipe fitters, Steam fitters, Gas service technician, Business owners and general consumers). Should provide rental services of tools with wide range of rental plans by eliminating the huge capital investment and maintenance efforts. Provides rental services of home improvement tools across the country which benefits the technicians/small scale business owners by eradicating the need of transporting the tools to different locations where they do repairs/services.",
+    "The purpose of the online flight management system is to ease flight management and to create a convenient and easy-to-use application for passengers, trying to buy airline tickets. The system is based on a relational database with its flight management and reservation functions. We will have a database server supporting hundreds of major cities around the world as well as thousands of flights by various airline companies. Above all, we hope to provide a comfortable user experience along with the best pricing available.",
+    "Simple Library Management System using which a librarian can add book details like ISBN number, book title, author name, edition, and publication details through a web page. In addition to this, the librarian or any user can search for the available books in the library by the book name. If book details are present in the database, the search details are displayed.",
+    "Container tracking app: Streamline your logistics operations with a container tracking application. Track the movement of your shipments in real time, ensuring transparency and efficiency throughout the supply chain. Get instant updates on container status, location, and estimated arrival times. Simplify the management of your cargo and enhance collaboration with shipping partners, empowering you to stay ahead in the global marketplace.",
+    "Bike servicing app: A door-step bike servicing platform and application which will use technology for the convenience of two-wheeler owners by providing them a transparent connection with high-quality vehicle maintenance providers. The platform can provide assisted door-step pick-up and drop, an in-built inventory management system that enables reduction of waiting-time, smarter stock allocation, an order management system etc.",
+    "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals.",
     ]
-    INPUT_TEXT_TMP = random.choice(sample_code_gen_qns)
-    return INPUT_TEXT_TMP
-
+    
 #@st.cache_resource
 def generate_code(txt, lang_option):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
@@ -238,8 +230,10 @@ result_code = []
 
 #button_random = st.button("Randomize App Description")
 #if button_random:
-tmp_val = generate_random_input()
 app_val = "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals."
+
+random_index = random.randint(1, len(sample_code_gen_qns))
+app_val = sample_code_gen_qns[random_index]
 
 text_input = st.text_area('Describe in a few sentences the app you want to build', value=app_val, height=200, key='fav1')
     
