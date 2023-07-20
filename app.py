@@ -275,12 +275,12 @@ if submit_button:
     response_doc = None
     result_api = []
     response_api = None
-    with st.spinner("Wait for the magic ... I'm generating a set of things to bootstrap your app build"):
+    with st.spinner("Wait for the magic ... "):
         
-        progress_text = "Operation in progress. Please wait."
+        progress_text = "I'm generating a set of things to bootstrap your app build. Please wait."
         my_bar = st.progress(0, text=progress_text)
 
-        for percent_complete in range(100):
+        for percent_complete in range(1000):
             time.sleep(0.1)
             my_bar.progress(percent_complete + 1, text=progress_text)
         
