@@ -283,7 +283,7 @@ if submit_button:
     
     with st.spinner("Wait for the magic ... "):
         
-        progress_text = "I'm generating a set of things to bootstrap your app build. n 💡 Did you know: " + random.choice(factoid_list)
+        progress_text = "I'm generating a set of things to bootstrap your app build." + '\n' + "💡 Did you know: " + random.choice(factoid_list)
         my_bar = st.progress(0, text=progress_text)
 
         for percent_complete in range(100):
