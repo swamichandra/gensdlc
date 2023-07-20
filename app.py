@@ -238,7 +238,9 @@ result_code = []
 
 #button_random = st.button("Randomize App Description")
 #if button_random:
-text_input = st.text_area('Describe in a few sentences the app you want to build', generate_random_input(), height=200, key='fav1')
+app_val = generate_random_input()
+
+text_input = st.text_area('Describe in a few sentences the app you want to build', value=app_val, height=200, key='fav1')
     
 lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
 
