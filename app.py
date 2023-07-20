@@ -261,7 +261,7 @@ with col1:
 with col2:
     cloud_provider = st.radio("Target Cloud Platform:", ('AWS', 'Azure', 'GCP', 'Hybrid'), horizontal=True, disabled=True)
     
-submit_button = st.button('Generate')
+submit_button = st.button('GENERATE')
 
 
 if submit_button:
