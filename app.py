@@ -28,10 +28,10 @@ st.title('💫 SDLC augmented by Gen A.I')
 st.markdown("""
         <style>
                .block-container {
-                    padding-top: 1rem;
+                    padding-top: 1.2rem;
                     padding-bottom: 0rem;
-                    padding-left: 1rem;
-                    padding-right: 1rem;
+                    padding-left: 1.2rem;
+                    padding-right: 1.2rem;
                 }
         </style>
         """, unsafe_allow_html=True)
