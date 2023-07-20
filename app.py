@@ -235,10 +235,9 @@ result_code = []
 # Using the "with" syntax
 #with st.form(key='sdlc_form', clear_on_submit = False):
 
-button_random = st.button("Randomize App Description")
-
+#button_random = st.button("Randomize App Description")
 #if button_random:
-text_input = st.text_area('Describe in a few sentences the app you want to build', generate_random_input, height=200, key='fav1')
+text_input = st.text_area('Describe in a few sentences the app you want to build', generate_random_input(), height=200, key='fav1')
     
 lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
 
