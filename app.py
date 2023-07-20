@@ -241,7 +241,7 @@ app_val = "Fitness App: A healthy lifestyle web application targeting health con
 #random_index = random.randint(1, len(sample_code_gen_qns))
 #app_val = sample_code_gen_qns[random_index]
 
-text_input = st.text_area('Describe in a few sentences the app you want to build', value=app_val, height=200, key='fav1')
+text_input = st.text_area('Describe in a few sentences the app you want to develop. I will then use AI generative capabilities to create some key artifacts that can help jumpstart your app development process.', value=app_val, height=200, key='fav1')
     
 lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
 
