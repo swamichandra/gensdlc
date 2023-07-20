@@ -259,7 +259,7 @@ col1, col2 = st.columns(2)
 with col1:
     lang_option = st.radio("Target Programming Language:", ('Python', 'Java', 'JavaScript', 'Go', 'Rust'), horizontal=True)
 with col2:
-    cloud_provider = st.radio("Target Cloud Platform:", ('AWS', 'Azure', 'GCP', 'Hybrid'), horizontal=True, disabled=True)
+    cloud_provider = st.radio("Target Cloud Platform:", ('GCP', 'Azure', 'AWS', 'Hybrid'), horizontal=True, disabled=True)
     
 submit_button = st.button('GENERATE')
 
