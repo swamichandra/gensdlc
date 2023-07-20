@@ -6,15 +6,15 @@ html, body, [class*="css"] {
 }
 
 div.stButton > button {
-        cursor:pointer;outline:0;display:inline-block;font-weight:400;line-height:1.5;text-align:center;background-color:transparent;border:2px solid transparent;padding:6px 12px;font-size:1rem;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;color:#17D7EA;border-color:#16B6C6; display:block; margin: 0 auto;        
+        cursor:pointer;outline:0;display:inline-block;font-weight:400;line-height:1.5;text-align:center;background-color:transparent;border:2px solid transparent;padding:6px 12px;font-size:1rem;border-radius:.25rem;transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;color:#5856d6;border-color:#5856d6; display:block; margin: 0 auto;        
 }
 
 div.stButton > button:hover {
-    color:#fff;background-color:#17D7EA;border-color:#16B6C6
+    color:#fff;background-color:#043c8c;border-color:#16B6C6
 }
 
 .small-font {
-    font-size: 8px !important;
+    font-size: 9px !important;
 }
 
 """
