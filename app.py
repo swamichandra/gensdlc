@@ -33,19 +33,20 @@ st.markdown("""
                     padding-left: 1.5rem;
                     padding-right: 1.5rem;
                 }
-        </style>
-        """, unsafe_allow_html=True)
-
+</style>
+""", unsafe_allow_html=True)
+        
 # Global Settings and Config
 project_id = "learning-351419"
 loc = "us-central1"
-primary_model_name = "text-bison@001"
-temperature = 0.3
-max_output_tokens = 1024
-top_p = 0.8
-top_k = 40
-location = "us-central1"
-model_name = "text-bison@001"
+
+# Confuguration Section Starts
+primary_model_name = st.sidebar.selectbox("Model", ["text-bison@001"])
+temperature = st.sidebar.slider("Temperature _(Higher value will result in more **random** responses)_", 0.0, 1.0, .3)
+max_output_tokens = st.sidebar.number_input("Max Output Tokens _(Number of tokens that the model will **generate**)_", 200, 2048, 1024)
+top_p = st.sidebar.slider("Top_p _(Higher value will result in more **creative** responses)_", 0.0, 1.0, 0.5)
+top_k = st.sidebar.slider("Top_k _(Higher value will result in more **diverse** responses)_", 1, 100, 40)
+# Confuguration Section Ends
 
 # Create API client.
 credentials = service_account.Credentials.from_service_account_info(
@@ -70,7 +71,7 @@ sample_code_gen_qns = [
     "Bike servicing app: A door-step bike servicing platform and application which will use technology for the convenience of two-wheeler owners by providing them a transparent connection with high-quality vehicle maintenance providers. The platform can provide assisted door-step pick-up and drop, an in-built inventory management system that enables reduction of waiting-time, smarter stock allocation, an order management system etc.",
     "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals.",
     ]
-    
+
 @st.cache_resource
 def generate_code(txt, lang_option):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
@@ -303,7 +304,7 @@ if submit_button:
     
     with st.spinner("Hang tight for a few .... Wait for the magic ... "):
         
-        progress_text = "I'm generating a set of things to bootstrap your app build." + '\n\n' + "💡 Did you know: " + random.choice(factoid_list)
+        progress_text = "I'm generating a set of things to bootstrap your app build." + '\n\n\n' + "💡 Did you know: " + random.choice(factoid_list)
         my_bar = st.progress(0, text=progress_text)
 
         for percent_complete in range(100):
