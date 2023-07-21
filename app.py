@@ -71,7 +71,7 @@ sample_code_gen_qns = [
     "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals.",
     ]
     
-#@st.cache_resource
+@st.cache_resource
 def generate_code(txt, lang_option):
     PROJECT_ID = "learning-351419"  # @param {type:"string"}
     vertexai.init(project=PROJECT_ID, location="us-central1")
@@ -111,7 +111,7 @@ def generate_code(txt, lang_option):
 
     return res
 
-#@st.cache_resource
+@st.cache_resource
 def generate_product_backlog(txt):
     # Prompt Template
     prod_backlog_gen_prompt_template = """You are a master product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and a list of asscoiated features. Assign a level of priority (High, Medium, Low) for each of the features. Include non-functional epics and features as well. List the backlog as a table with the following: Epic Name, Features, and Priority.
@@ -145,7 +145,7 @@ def generate_product_backlog(txt):
 
     return res
 
-#@st.cache_resource
+@st.cache_resource
 def generate_api(txt, backlog):
     # Prompt Template
     api_gen_prompt_template = """Based on the requirements below generate a lit of RESTful API's. Create definitions that follows domain drive API best practices. Use descriptive names and consistent conventions. Include HTTP methods, endpoint paths, request and response examples in JSON format. Document all endpoints thoroughly explaining the functionality, required parameters, sample requests/responses and error conditions. Implement proper authentication, input validation, error handling, rate limiting, and idempotent endpoints. Provide sensible defaults and optional parameters where applicable. Make the API intuitive and easy to use. Focus on simplicity without unnecessary complexity in the design. Use proper versioning and pagination. Follow REST principles and HTTP standards.
@@ -174,7 +174,7 @@ def generate_api(txt, backlog):
     return res
 
 
-#@st.cache_resource
+@st.cache_resource
 def generate_test_cases(txt, backlog):
     # Prompt Template    
     test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table with columns: Test Case ID, Test Type, Description, Input Data, Expected Result
@@ -206,7 +206,7 @@ def generate_test_cases(txt, backlog):
 
     return res
 
-#@st.cache_resource
+@st.cache_resource
 def generate_documentation(txt, backlog, code):
     # Prompt Template
     doc_gen_prompt_template = """You are a master technical writer. Based on the requirements, backlog and code provided below, generate readthedocs style product documentation. Include the following: README, Detailed Description, Installation Instructions, API Documentation, Getting Started. Generate text version only.
