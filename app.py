@@ -42,9 +42,9 @@ loc = "us-central1"
 
 # Confuguration Section Starts
 primary_model_name = st.sidebar.selectbox("Model", ["text-bison@001"])
-temperature = st.sidebar.slider("Temperature _(Higher value will result in more **random** responses)_", 0.0, 1.0, .3)
+temperature = st.sidebar.number_input("Temperature _(Higher value will result in more **random** responses)_", 0.0, 1.0, 0.3)
 max_output_tokens = st.sidebar.number_input("Max Output Tokens _(Number of tokens that the model will **generate**)_", 200, 2048, 1024)
-top_p = st.sidebar.slider("Top_p _(Higher value will result in more **creative** responses)_", 0.0, 1.0, 0.5)
+top_p = st.sidebar.number_input("Top_p _(Higher value will result in more **creative** responses)_", 0.0, 1.0, 0.5)
 top_k = st.sidebar.slider("Top_k _(Higher value will result in more **diverse** responses)_", 1, 100, 40)
 # Confuguration Section Ends
 
