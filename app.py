@@ -32,7 +32,15 @@ st.markdown("""
                     padding-bottom: 0rem;
                     padding-left: 1.5rem;
                     padding-right: 1.5rem;
-                }
+            }
+            [data-testid="stSidebar"]::before {
+                content: "Advanced Config";
+                margin-left: 20px;
+                margin-top: 20px;
+                font-size: 20px;
+                position: relative;
+                top: 100px;
+            }
 </style>
 """, unsafe_allow_html=True)
         
