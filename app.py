@@ -258,6 +258,7 @@ result_code = []
 #button_random = st.button("Randomize App Description")
 #if button_random:
 app_val = "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals."
+app_val = "Receipt Management App: A receipt management app that will store all user receipts and bills in a single place so that they no longer have to manage each and every receipt manually. It will also have the option for stores to send your receipts directly to your mobile app."
 
 #random_index = random.randint(1, len(sample_code_gen_qns))
 #app_val = sample_code_gen_qns[random_index]
