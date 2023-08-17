@@ -127,9 +127,9 @@ def generate_product_backlog(txt):
     {text}
     """
     
-    prod_backlog_gen_prompt_template = """Based on the requirements below generate a prioritized product backlog for as a table with the following columns: Epic, Feature, Description, Priority
+    prod_backlog_gen_prompt_template = """Based on the requirements below generate a prioritized product backlog as a table with the following columns: Epic, Feature, Description, Priority
 
-    Come up with 5-7 logical epics that group related features. Under each epic, list out 3-5 concrete features that are valuable to users. Write clear and concise descriptions for each epic and feature. Assign priority numbers from 1 to 10, with 1 being the highest priority feature. Ensure the features align to the product vision and strategy. Include a mix of must-have and nice-to-have capabilities. Structure the epics and features to maximize business value, mitigate risk, and allow for incremental delivery. Order the rows by priority with the most important items on top.
+    Come up with 5-7 logical epics that group related features. Under each epic, list out 3-5 concrete features that are valuable to users. Write clear and concise descriptions for each epic and feature in the table. Assign priority numbers from 1 to 10, with 1 being the highest priority feature. Ensure the features align to the product vision and strategy. Include a mix of must-have and nice-to-have capabilities. Structure the epics and features to maximize business value, mitigate risk, and allow for incremental delivery. Order the rows by priority with the most important items on top.
     {text}
     """    
     
@@ -186,7 +186,7 @@ def generate_api(txt, backlog):
 @st.cache_resource
 def generate_test_cases(txt, backlog):
     # Prompt Template    
-    test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table with columns: Test Case ID, Test Type, Description, Input Data, Expected Result
+    test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table. The table must have the following columns: Test Case ID, Test Type, Description, Input Data, Expected Result
 
     Read through the provided application description and code. Create test cases to evaluate functionality, usability, performance, security, compatibility, reliability and other quality attributes. Outline superb test data covering valid, invalid, edge case scenarios. Specify detailed test steps and expected results. Include positive, negative, destructive, exploratory, regression, user acceptance testing. Evaluate against quality standards and requirements. Recommend optimal test environments, tools and techniques. Develop a formal test plan covering scope, schedule, time estimation, environment needs, metrics, team structure and responsibilities. Apply best practices for requirement traceability and risk based testing. Focus on maximizing test coverage and defect detection. Document all test cases clearly in an easy to read tabular format with proper alignment, spacing and headings. Produce a high quality, reusable test suite following industry standards and guidelines.
         
@@ -259,7 +259,7 @@ result_code = []
 #if button_random:
 app_val = "Fitness App: A healthy lifestyle web application targeting health conscious people to track their habits assisted by registered nutritionists, pathologists and health coaches in order to ultimately lower the risk of lifestyle disorders. The application would be equipped with several charts that help the user manage their overall health- like weight, sugar, heart rate, blood pressure etc. User is also equipped with individual meal charts, lifestyle plans, nutrition plans as per their condition. It will also be integrated with chat facility that allows users to talk with the community as well as health professionals."
 app_val = "Receipt Management App: A receipt management app that will store all user receipts and bills in a single place so that they no longer have to manage each and every receipt manually. It will also have the option for stores to send your receipts directly to your mobile app."
-
+app_val = "Criminal alert app: The Criminal alert app can be designed to help users stay alert of wanted criminals in their area. It will also have an alert button to inform the police and a GPS feature to show your location to the police."
 #random_index = random.randint(1, len(sample_code_gen_qns))
 #app_val = sample_code_gen_qns[random_index]
 
