@@ -128,9 +128,9 @@ def generate_product_backlog(txt):
     {text}
     """
     
-    prod_backlog_gen_prompt_template = """Based on the requirements below generate a prioritized product backlog as a table with the following columns: Epic, Feature, Description, Priority
+    prod_backlog_gen_prompt_template = """Based on the requirements below generate a prioritized product backlog as a table with the following columns: Req Id, Epic, Feature, Description, Priority
 
-    Come up with 5-7 logical epics that group related features. Under each epic, list out 3-5 concrete features that are valuable to users. Write clear and concise descriptions for each epic and feature in the table. Assign an ID (column named 'Req Id') for each. Assign priority numbers from 1 to 10, with 1 being the highest priority feature. Ensure the features align to the product vision and strategy. Include a mix of must-have and nice-to-have capabilities. Structure the epics and features to maximize business value, mitigate risk, and allow for incremental delivery. Order the rows by priority with the most important items on top.
+    Come up with 5-7 logical epics that group related features. Under each epic, list out 3-5 concrete features that are valuable to users. Write clear and concise descriptions for each epic and feature in the table. Assign a unique identifier (column named 'Req Id') for each. Assign priority numbers from 1 to 10, with 1 being the highest priority feature. Ensure the features align to the product vision and strategy. Include a mix of must-have and nice-to-have capabilities. Structure the epics and features to maximize business value, mitigate risk, and allow for incremental delivery. Order the rows by priority with the most important items on top.
     {text}
     """    
     
