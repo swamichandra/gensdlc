@@ -20,9 +20,9 @@ from google.oauth2 import service_account
 from vertexai.preview.language_models import TextGenerationModel
 
 # Page title
-st.set_page_config(page_title="SDLC powered by GCP Vertex Generative A.I", page_icon=":random:", layout="wide")
+st.set_page_config(page_title="SDLC Agent powered by GCP Vertex Generative A.I", page_icon=":random:", layout="wide")
 st.write(f'<style>{css.v1}</style>', unsafe_allow_html=True)
-st.title('💫 SDLC augmented by Gen A.I')
+st.title('💫 SDLC AI Agent')
 
 # Remove whitespace from the top of the page and sidebar
 st.markdown("""
@@ -187,7 +187,7 @@ def generate_api(txt, backlog):
 @st.cache_resource
 def generate_test_cases(txt, backlog):
     # Prompt Template    
-    test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table. Map back to the 'Req Id' from the product backlog geenrated. The table must have the following columns: Req Id, Test Case ID, Test Type, Description, Input Data, Expected Result
+    test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table. Map back to the 'Req Id' from the product backlog geenrated. One Feature in the product backlog can have multiple test cases. The table must have the following columns: Req Id, Test Case ID, Test Type, Description, Input Data, Expected Result
 
     Read through the provided application description and code. Create test cases to evaluate functionality, usability, performance, security, compatibility, reliability and other quality attributes. Outline superb test data covering valid, invalid, edge case scenarios. Specify detailed test steps and expected results. Include positive, negative, destructive, exploratory, regression, user acceptance testing. Evaluate against quality standards and requirements. Recommend optimal test environments, tools and techniques. Develop a formal test plan covering scope, schedule, time estimation, environment needs, metrics, team structure and responsibilities. Apply best practices for requirement traceability and risk based testing. Focus on maximizing test coverage and defect detection. Document all test cases clearly in an easy to read tabular format with proper alignment, spacing and headings. Produce a high quality, reusable test suite following industry standards and guidelines.
         
