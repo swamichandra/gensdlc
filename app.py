@@ -124,13 +124,13 @@ def generate_code(txt, lang_option):
 @st.cache_resource
 def generate_product_backlog(txt):
     # Prompt Template
-    prod_backlog_gen_prompt_template = """You are a master product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and a list of asscoiated features. Assign a level of priority (High, Medium, Low) for each of the features. Include non-functional epics and features as well. List the backlog as a table with the following: Epic Name, Features, and Priority.
+    prod_backlog_gen_prompt_template = """You are a master product manager. Based on the requirements provided below, generate a product backlog. Organize the backlog into epics and a list of asscoiated features. Assign an ID for each. Assign a level of priority (High, Medium, Low) for each of the features. Include non-functional epics and features as well. List the backlog as a table with the following: Epic Name, Features, and Priority.
     {text}
     """
     
     prod_backlog_gen_prompt_template = """Based on the requirements below generate a prioritized product backlog as a table with the following columns: Epic, Feature, Description, Priority
 
-    Come up with 5-7 logical epics that group related features. Under each epic, list out 3-5 concrete features that are valuable to users. Write clear and concise descriptions for each epic and feature in the table. Assign priority numbers from 1 to 10, with 1 being the highest priority feature. Ensure the features align to the product vision and strategy. Include a mix of must-have and nice-to-have capabilities. Structure the epics and features to maximize business value, mitigate risk, and allow for incremental delivery. Order the rows by priority with the most important items on top.
+    Come up with 5-7 logical epics that group related features. Under each epic, list out 3-5 concrete features that are valuable to users. Write clear and concise descriptions for each epic and feature in the table. Assign an ID (column named 'Req Id') for each. Assign priority numbers from 1 to 10, with 1 being the highest priority feature. Ensure the features align to the product vision and strategy. Include a mix of must-have and nice-to-have capabilities. Structure the epics and features to maximize business value, mitigate risk, and allow for incremental delivery. Order the rows by priority with the most important items on top.
     {text}
     """    
     
@@ -187,7 +187,7 @@ def generate_api(txt, backlog):
 @st.cache_resource
 def generate_test_cases(txt, backlog):
     # Prompt Template    
-    test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table. The table must have the following columns: Test Case ID, Test Type, Description, Input Data, Expected Result
+    test_case_gen_prompt_template = """Using the details below generate a comprehensive quality assurance test plan and test cases for an application in a well-formatted table. Map back to the 'Req Id' from the product backlog geenrated. The table must have the following columns: Req Id, Test Case ID, Test Type, Description, Input Data, Expected Result
 
     Read through the provided application description and code. Create test cases to evaluate functionality, usability, performance, security, compatibility, reliability and other quality attributes. Outline superb test data covering valid, invalid, edge case scenarios. Specify detailed test steps and expected results. Include positive, negative, destructive, exploratory, regression, user acceptance testing. Evaluate against quality standards and requirements. Recommend optimal test environments, tools and techniques. Develop a formal test plan covering scope, schedule, time estimation, environment needs, metrics, team structure and responsibilities. Apply best practices for requirement traceability and risk based testing. Focus on maximizing test coverage and defect detection. Document all test cases clearly in an easy to read tabular format with proper alignment, spacing and headings. Produce a high quality, reusable test suite following industry standards and guidelines.
         
