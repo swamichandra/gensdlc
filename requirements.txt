@@ -1,5 +1,5 @@
 streamlit
 google-cloud-aiplatform
 vertexai
-langchain
+langchain[all]
 tiktoken
